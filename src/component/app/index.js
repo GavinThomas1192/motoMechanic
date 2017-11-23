@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
-import EncycloNavbar from '../encyclopedia'
+import Encyclopedia from '../encyclopedia'
 import Home from '../home'
 
 
@@ -17,7 +17,7 @@ class App extends React.Component {
                 <BrowserRouter>
                     <div>
 
-                        <Route exact path="/encycleopedia" component={EncycloNavbar} />
+                        <Route exact path="/encyclopedia" component={Encyclopedia} />
                         <Route exact path="/" component={Home} />
 
                         <Home />
