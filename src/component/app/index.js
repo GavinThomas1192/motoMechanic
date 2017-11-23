@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
-import EncycloNavbar from '../navbar'
+import EncycloNavbar from '../encyclopedia'
 import Home from '../home'
 
 
