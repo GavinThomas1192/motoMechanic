@@ -1,5 +1,5 @@
 import React from 'react';
-import Bike from '../components/bike';
+import Bike from '../bike';
 
 
 class BikeContainer extends React.Component {

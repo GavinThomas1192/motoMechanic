@@ -28,7 +28,7 @@ class Home extends React.Component {
                 <Link to='/'>Learning</Link>
 
 
-                <Link to='/'>Maintenance</Link>
+                <Link to='/bikes'>Maintenance</Link>
 
               </Nav>
             </Navbar.Collapse>
