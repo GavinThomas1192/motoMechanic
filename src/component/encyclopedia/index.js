@@ -39,7 +39,6 @@ class Encyclopedia extends React.Component {
               <Link to='/encyclopedia/'>Tourer</Link>
 
             </Nav>
-            <h1>Hello from the encyclopedia</h1>
           </Navbar.Collapse>
         </Navbar>
       </div>
