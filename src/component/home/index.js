@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import EncycloNavbar from '../navbar'
+import EncycloNavbar from '../encyclopedia'
 import { Navbar, Nav } from 'react-bootstrap'
 
 
