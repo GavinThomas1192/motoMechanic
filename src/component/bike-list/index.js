@@ -16,6 +16,7 @@ class BikeList extends React.Component {
   render() {
     return (
       <div>
+        <h1>Hello from the bike list component</h1>
         {this.genBikeContainers()}
       </div>
     );

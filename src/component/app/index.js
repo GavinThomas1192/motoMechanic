@@ -1,5 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import EncycloNavbar from '../navbar'
+import Home from '../home'
 
 
 
@@ -11,9 +14,15 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <h1>
-                    This is from the App Component.
-                </h1>
+                <BrowserRouter>
+                    <div>
+
+                        <Route exact path="/encycleopedia" component={EncycloNavbar} />
+                        <Route exact path="/" component={Home} />
+
+                        <Home />
+                    </div>
+                </BrowserRouter>
             </div>
         )
     }
