@@ -12,6 +12,7 @@ import { userFetchRequest, tokenSetRequest } from '../../action/auth-actions';
 
 
 
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -36,6 +37,7 @@ class App extends React.Component {
                         <Route exact path="/login" component={() => !this.props.auth ? <LandingPage /> : <Redirect to='/' />} />
                         <Route exact path="/" component={() => this.props.auth ? <Home /> : <Redirect to='/login' />} />
                         <Route exact path="/bikes" component={BikeContainer} />
+
 
                     </div>
                 </BrowserRouter>

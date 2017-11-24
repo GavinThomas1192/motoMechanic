@@ -40,6 +40,7 @@ class Home extends React.Component {
       <div className=''>
         <h1>Hello from the home</h1>
         <h2>I have no idea what to put here</h2>
+
       </div>
     );
   }

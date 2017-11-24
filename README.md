@@ -8,3 +8,5 @@
     * Contact Gavin Thomas at gthomas1192@gmail.com for the app secret id
     * Example .dev.env
         * FACEBOOK_APP_ID = 'xxxxxxxxxxxxxx'
+##### Protected branch === master
+    * Please submit a PR with info on changes
