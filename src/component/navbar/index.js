@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'
 import Encyclopedia from '../encyclopedia'
 import { Navbar, Nav } from 'react-bootstrap'
 import Drawer from 'material-ui/Drawer';
@@ -28,6 +29,10 @@ class NavBar extends React.Component {
         this.setState({ open: false });
     }
 
+    componentWillReceiveProps(nextProps) {
+        console.log('HEHEHEHEH', nextProps);
+    }
+
 
     render() {
         return (
@@ -37,9 +42,9 @@ class NavBar extends React.Component {
                 <AppBar
                     style={{ backgroundColor: '#757575' }}
                     title="MotoMechanic"
-                    iconClassNameRight="muidocs-icon-navigation-expand-more"
                     onLeftIconButtonTouchTap={this.handleToggle}
                     onRightIconButtonTouchTap={this.handleToggle}
+                    iconElementRight={<img src={this.props.user.picture.data.url} />}
                 />
                 <div>
 
@@ -67,4 +72,13 @@ class NavBar extends React.Component {
     }
 }
 
-export default NavBar;
+let mapStateToProps = state => ({
+    auth: state.auth,
+    user: state.user,
+});
+
+let mapDispatchToProps = dispatch => ({
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
