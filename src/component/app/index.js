@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import Encyclopedia from '../encyclopedia'
 import Home from '../home'
-import Bike from '../bike'
+import BikeContainer from '../bike-container'
 import NavBar from '../navbar'
 import LandingPage from '../landing-page'
 import { userFetchRequest, tokenSetRequest } from '../../action/auth-actions';
@@ -18,8 +18,8 @@ class App extends React.Component {
     }
 
 
-    componentWillMount() {
-
+    componentDidUpdate() {
+        console.log('COMPONENT DID UPDATE', this.props.user)
     }
 
     render() {
@@ -35,7 +35,7 @@ class App extends React.Component {
                         <Route exact path="/encyclopedia" component={Encyclopedia} />
                         <Route exact path="/login" component={() => !this.props.auth ? <LandingPage /> : <Redirect to='/' />} />
                         <Route exact path="/" component={() => this.props.auth ? <Home /> : <Redirect to='/login' />} />
-                        <Route exact path="/bikes" component={Bike} />
+                        <Route exact path="/bikes" component={BikeContainer} />
 
                     </div>
                 </BrowserRouter>
