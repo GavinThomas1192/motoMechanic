@@ -3,6 +3,7 @@ import React from 'react';
 import { Button } from 'react-bootstrap'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import * as utils from '../../lib/utils'
 
 
 class BikeCreate extends React.Component {
@@ -28,6 +29,7 @@ class BikeCreate extends React.Component {
       mileage,
       id,
       bikeAvatar,
+      preview,
       editing: false,
       completed: false,
     };
@@ -41,6 +43,15 @@ class BikeCreate extends React.Component {
     this.setState({
       [e.target.name]: e.target.value,
     });
+    if (name === 'bikeAvatar') {
+      let { files } = e.target;
+      let bikeAvatar = files[0];
+      this.setState({ bikeAvatar });
+
+      utils.photoToDataUrl(bikeAvatar)
+        .then(preview => this.setState({ preview }))
+        .catch(console.error);
+    }
   }
 
   handleSubmit(e) {
@@ -60,6 +71,7 @@ class BikeCreate extends React.Component {
 
 
   render() {
+    console.log(this.state)
     return (
       <div>
 
@@ -128,6 +140,7 @@ class BikeCreate extends React.Component {
             /><br />
 
             <h3>Upload a photo</h3>
+            <img src={this.state.preview} style={{ 'width': '25%' }} />
             <TextField
 
               multiLine={false}
@@ -147,7 +160,7 @@ class BikeCreate extends React.Component {
             <RaisedButton label={this.props.buttonText} primary={true} type='submit' />
           </div>
         </form>
-      </div>
+      </div >
     );
   }
 }
