@@ -1,6 +1,6 @@
 import React from 'react';
 
-import BikeContainer from '../containers/bike-container';
+import BikeContainer from '../bike-container';
 
 
 class BikeList extends React.Component {

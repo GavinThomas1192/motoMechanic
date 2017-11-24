@@ -34,6 +34,7 @@ class Home extends React.Component {
     return (
       <div className=''>
         <h1>Hello from the home</h1>
+
       </div>
     );
   }
