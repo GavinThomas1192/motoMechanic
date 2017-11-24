@@ -16,7 +16,13 @@ let plugins = [
     new DefinePlugin({
         __DEBUG__: JSON.stringify(!production),
         __API_URL__: JSON.stringify(process.env.API_URL),
-        __FACEBOOK_APP_ID__: JSON.stringify(process.env.FACEBOOK_APP_ID)
+        __FACEBOOK_APP_ID__: JSON.stringify(process.env.FACEBOOK_APP_ID),
+        __API_KEY__: JSON.stringify(process.env.APIKEY),
+        __AUTH_DOMAIN__: JSON.stringify(process.env.AUTHDOMAIN),
+        __DATABASE_URL__: JSON.stringify(process.env.DATABASEURL),
+        __PROJECT_ID__: JSON.stringify(process.env.PROJECTID),
+        __MESSAGING_SENDER_ID__: JSON.stringify(process.env.MESSAGINGSENDERID),
+        __STORAGE_BUCKET__: JSON.stringify(process.env.STORAGEBUCKET),
 
     }),
 ];
