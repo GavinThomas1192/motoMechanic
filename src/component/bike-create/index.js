@@ -15,8 +15,8 @@ class BikeCreate extends React.Component {
     let year = props.bikeUpdate ? props.bikeUpdate.year : '';
     let color = props.bikeUpdate ? props.bikeUpdate.color : '';
     let mileage = props.bikeUpdate ? props.bikeUpdate.mileage : '';
-
-
+    let bikeAvatar = props.bikeUpdate ? props.bikeUpdate.bikeAvatar : ''
+    let preview = props.bikeUpdate ? props.bikeUpdate.preview : ''
     let id = props.bikeUpdate ? props.bikeUpdate.id : 1;
 
     this.state = {
@@ -27,6 +27,7 @@ class BikeCreate extends React.Component {
       color,
       mileage,
       id,
+      bikeAvatar,
       editing: false,
       completed: false,
     };
@@ -123,6 +124,17 @@ class BikeCreate extends React.Component {
               name='mileage'
               type='number'
               value={this.state.mileage}
+              onChange={this.handleChange}
+            /><br />
+
+            <h3>Upload a photo</h3>
+            <TextField
+
+              multiLine={false}
+              rows={1}
+              name='bikeAvatar'
+              type='file'
+              value={this.state.bikeAvatar}
               onChange={this.handleChange}
             /><br />
 
