@@ -16,6 +16,7 @@ let plugins = [
     new DefinePlugin({
         __DEBUG__: JSON.stringify(!production),
         __API_URL__: JSON.stringify(process.env.API_URL),
+        __FACEBOOK_APP_ID__: JSON.stringify(process.env.FACEBOOK_APP_ID)
 
     }),
 ];
