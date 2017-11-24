@@ -31,7 +31,7 @@ export const tokenSetRequest = token => dispatch => {
 
 export const loginRequest = user => dispatch => {
     dispatch(userSet(user));
-    database.ref('users/' + user.userId).set({
+    database.ref('users/' + user.userID).set({
         user
     });
 };
