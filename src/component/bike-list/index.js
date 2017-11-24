@@ -1,23 +1,29 @@
 import React from 'react';
+import Avatar from 'material-ui/Avatar';
+import { List, ListItem } from 'material-ui/List';
+import Subheader from 'material-ui/Subheader';
+import Divider from 'material-ui/Divider';
+import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
 
-import BikeContainer from '../bike-container';
+
+
+
 
 
 class BikeList extends React.Component {
-
-
-  genBikeContainers() {
-    return this.props.bikes.map((bike, index) => {
-      return <BikeContainer key={bike.model + index} bike={bike} />;
-    });
+  constructor(props) {
+    super(props)
   }
-
-
   render() {
     return (
       <div>
         <h1>Hello from the bike list component</h1>
-        {this.genBikeContainers()}
+        <List>
+          {this.props.allBikes.map(ele => {
+            return <ListItem key={mileage} primaryText={ele.name} />
+          })}
+        </List>
+
       </div>
     );
   }

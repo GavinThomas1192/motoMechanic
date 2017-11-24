@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux'
 import FacebookLogin from 'react-facebook-login';
-import { tokenSetRequest } from '../../action/auth-actions'
+import { tokenSetRequest, loginRequest } from '../../action/auth-actions'
 
 
 class LandingPage extends React.Component {
@@ -15,22 +15,25 @@ class LandingPage extends React.Component {
             //I commented this out for safety 
             // console.log(response);
             this.props.tokenSet(response.accessToken);
+            this.props.login(response);
         }
 
         return (
             //Here we can change autoload=True and they won't have to ever press login on their own!
             <FacebookLogin
                 appId={__FACEBOOK_APP_ID__}
-                autoLoad={false}
+                autoLoad={true}
                 fields="name,email,picture"
                 callback={responseFacebook} />
         )
     }
 }
 
+
 let mapStateToProps = () => ({});
 let mapDispatchToProps = dispatch => ({
     tokenSet: token => dispatch(tokenSetRequest(token)),
+    login: user => dispatch(loginRequest(user)),
 
 });
 

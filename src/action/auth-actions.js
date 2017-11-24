@@ -27,6 +27,31 @@ export const tokenSetRequest = token => dispatch => {
     });
 };
 
-export const tokenDelete = () => ({ type: 'TOKEN_DELETE', payload: null });
 
-export const logoutProfile = () => ({ type: 'LOGOUT_PROFILE', payload: null });
+export const loginRequest = user => dispatch => {
+    dispatch(userSet(user));
+};
+
+export const bikeCreateRequest = bike => (dispatch, getState) => {
+    let { user } = getState();
+    console.log('_ROUTING_NEWbike_TO_STORE_', bike)
+    console.log('_Attaching to this user_', user)
+    user.allBikes = []
+    user.allBikes.push(bike);
+    console.log('_AFTER COMBINING_', user)
+
+    dispatch(userUpdate(user));
+}
+
+export const bikeUpdateRequest = bike => (dispatch, getState) => {
+    let { user } = getState();
+    console.log('_bike_UPDATE_INCOMING_bike', bike)
+    dispatch(bikeUpdate(bike));
+}
+
+export const bikeDeleteRequest = bike => (dispatch, getState) => {
+    let { user } = getState();
+    console.log('_bike_DELETE_INCOMING_bike', bike)
+    dispatch(bikeDelete(bike));
+}
+
