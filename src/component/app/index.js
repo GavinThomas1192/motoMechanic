@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import Encyclopedia from '../encyclopedia'
 import Home from '../home'
-import BikeList from '../bike-list'
+import Bike from '../bike'
+import NavBar from '../navbar'
+
 
 
 
@@ -14,13 +16,16 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className='home'>
+
                 <BrowserRouter>
                     <div>
+                        <NavBar />
 
                         <Route exact path="/encyclopedia" component={Encyclopedia} />
                         <Route exact path="/" component={Home} />
-                        <Route exact path="/bikes" component={BikeList} />
+                        <Route exact path="/bikes" component={Bike} />
+
 
                     </div>
                 </BrowserRouter>
