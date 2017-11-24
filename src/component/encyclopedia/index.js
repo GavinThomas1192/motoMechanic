@@ -80,6 +80,7 @@ class Encyclopedia extends React.Component {
         );
 
         </div >
+
     );
   }
 }

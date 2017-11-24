@@ -8,6 +8,7 @@ import NavBar from '../navbar'
 
 
 
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -24,6 +25,7 @@ class App extends React.Component {
                         <Route exact path="/encyclopedia" component={Encyclopedia} />
                         <Route exact path="/" component={Home} />
                         <Route exact path="/bikes" component={Bike} />
+
 
                     </div>
                 </BrowserRouter>
