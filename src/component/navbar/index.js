@@ -44,8 +44,9 @@ class NavBar extends React.Component {
                     title="MotoMechanic"
                     onLeftIconButtonTouchTap={this.handleToggle}
                     onRightIconButtonTouchTap={this.handleToggle}
-                    iconElementRight={<img src={this.props.user.picture.data.url} />}
+                />}
                 />
+                    {/* iconElementRight={<img src={this.props.user.picture.data.url  */}
                 <div>
 
                     <Drawer

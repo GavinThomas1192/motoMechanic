@@ -19,7 +19,11 @@ class App extends React.Component {
         super(props);
     }
 
-
+    componentDidMount() {
+        let token = localStorage.getItem('firebase:host:motomechanic-dd66a.firebaseio.com');
+        console.log(token, 'HERE GAVIN HERE')
+        if (token) this.props.tokenSet(token);
+    }
     componentDidUpdate() {
         console.log('COMPONENT DID UPDATE', this.props.user)
     }
