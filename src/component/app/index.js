@@ -30,9 +30,12 @@ class App extends React.Component {
 
                 <BrowserRouter>
                     <div>
-                        <SignInScreen />
+
                         {this.props.auth ?
                             <NavBar /> :
+                            undefined}
+                        {!this.props.auth ?
+                            <SignInScreen /> :
                             undefined}
 
                         <Route exact path="/encyclopedia" component={Encyclopedia} />
