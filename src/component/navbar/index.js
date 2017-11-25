@@ -7,7 +7,9 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import AppBar from 'material-ui/AppBar';
-
+import { tokenDelete } from '../../action/auth-actions'
+import IconButton from 'material-ui/IconButton';
+import FontIcon from 'material-ui/FontIcon';
 
 
 
@@ -18,11 +20,17 @@ class NavBar extends React.Component {
 
         this.handleClose = this.handleClose.bind(this)
         this.handleToggle = this.handleToggle.bind(this)
+        this.handleLogout = this.handleLogout.bind(this);
     }
 
     handleToggle() {
 
         this.setState({ open: !this.state.open });
+    }
+
+    handleLogout() {
+        this.props.logoutUser();
+        localStorage.clear();
     }
 
     handleClose() {
@@ -43,7 +51,10 @@ class NavBar extends React.Component {
                     style={{ backgroundColor: '#757575' }}
                     title="MotoMechanic"
                     onLeftIconButtonTouchTap={this.handleToggle}
-                    onRightIconButtonTouchTap={this.handleToggle}
+                    iconElementRight={<IconButton>
+                        <FontIcon className="material-icons">add_circle</FontIcon>
+                    </IconButton>}
+                    onRightIconButtonTouchTap={this.handleLogout}
                 />}
                 />
                     {/* iconElementRight={<img src={this.props.user.picture.data.url  */}
@@ -79,7 +90,7 @@ let mapStateToProps = state => ({
 });
 
 let mapDispatchToProps = dispatch => ({
-
+    logoutUser: () => dispatch(tokenDelete()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

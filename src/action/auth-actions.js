@@ -21,6 +21,8 @@ export const tokenSet = token => ({
     payload: token,
 });
 
+
+
 export const tokenSetRequest = token => dispatch => {
     return new Promise((resolve, reject) => {
         resolve(dispatch(tokenSet(token)));
@@ -57,4 +59,6 @@ export const bikeDeleteRequest = bike => (dispatch, getState) => {
     console.log('_bike_DELETE_INCOMING_bike', bike)
     dispatch(bikeDelete(bike));
 }
+
+export const tokenDelete = () => ({ type: 'TOKEN_DELETE', payload: null });
 
