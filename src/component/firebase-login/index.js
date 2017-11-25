@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { FirebaseAuth } from 'react-firebaseui';
 import firebase from 'firebase';
+import * as firebaseUtils from '../../lib/firebase-config'
 import { loginRequest, tokenSetRequest } from '../../action/auth-actions'
 
 
@@ -9,12 +10,12 @@ import { loginRequest, tokenSetRequest } from '../../action/auth-actions'
 
 
 // Configure Firebase.
-const config = {
-    apiKey: __API_KEY__,
-    authDomain: __AUTH_DOMAIN__,
-    databaseURL: __DATABASE_URL__,
-};
-const firebaseApp = firebase.initializeApp(config)
+// const config = {
+//     apiKey: __API_KEY__,
+//     authDomain: __AUTH_DOMAIN__,
+//     databaseURL: __DATABASE_URL__,
+// };
+// const firebaseApp = firebase.initializeApp(config)
 
 
 
@@ -35,7 +36,9 @@ class SignInScreen extends React.Component {
         this.props.tokenSet(token.stsTokenManager.accessToken)
 
         // ************** creating user from firebase oauth return **************
+        console.log('hereererereererere', result);
         let combined = {}
+        combined.uid = result.uid
         combined.username = result.displayName
         combined.email = result.email
         this.props.loginRequest(combined);
@@ -50,8 +53,7 @@ class SignInScreen extends React.Component {
             signInSuccessUrl: '/',
             // We will display Google and Facebook as auth providers.
             signInOptions: [
-                firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+
                 firebase.auth.EmailAuthProvider.PROVIDER_ID
             ],
             callbacks: {
@@ -79,7 +81,7 @@ class SignInScreen extends React.Component {
             <div>
                 <h1>TESTING FIREBASE OAUTH</h1>
 
-                <FirebaseAuth uiConfig={uiConfig} firebaseAuth={firebaseApp.auth()} />
+                <FirebaseAuth uiConfig={uiConfig} firebaseAuth={firebaseUtils.firebaseApp.auth()} />
             </div>
         );
     }
