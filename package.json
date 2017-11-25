@@ -7,11 +7,10 @@
     "description": "",
     "main": "server.js",
     "scripts": {
-        "build": "webpack",
         "watch": "webpack-dev-server --inline --hot",
         "test": "jest",
         "test:watch": "jest --watchAll",
-        "heroku-postbuild": "webpack -p --progress",
+        "build": "npm run createfirebaseconf; NODE_ENV=production webpack -p;",
         "debug": "webpack --display-error-details"
     },
     "jest": {
