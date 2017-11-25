@@ -10,6 +10,7 @@ import AppBar from 'material-ui/AppBar';
 import { tokenDelete } from '../../action/auth-actions'
 import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
+import IconMenu from 'material-ui/IconMenu';
 
 
 
@@ -43,6 +44,10 @@ class NavBar extends React.Component {
 
 
     render() {
+        {/* iconElementRight={<IconButton>
+            <FontIcon className="material-icons">reorder</FontIcon>
+        </IconButton>} */}
+        {/* onRightIconButtonTouchTap={this.handleLogout} */ }
         return (
             <div >
                 {/* ***** NAVBAR FOR DRAWER ***** */}
@@ -51,10 +56,19 @@ class NavBar extends React.Component {
                     style={{ backgroundColor: '#757575' }}
                     title="MotoMechanic"
                     onLeftIconButtonTouchTap={this.handleToggle}
-                    iconElementRight={<IconButton>
-                        <FontIcon className="material-icons">add_circle</FontIcon>
-                    </IconButton>}
-                    onRightIconButtonTouchTap={this.handleLogout}
+                    iconElementRight={
+                        <IconMenu
+                            iconButtonElement={
+                                <IconButton><FontIcon className="material-icons">reorder</FontIcon></IconButton>
+                            }
+                            targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+                            anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+                        >
+                            <MenuItem primaryText="Refresh" />
+                            <MenuItem primaryText="Help" />
+                            <MenuItem onClick={() => this.handleLogout()} primaryText="Sign out" />
+                        </IconMenu>
+                    }
                 />}
                 />
                     {/* iconElementRight={<img src={this.props.user.picture.data.url  */}

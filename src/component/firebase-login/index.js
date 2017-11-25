@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import { FirebaseAuth } from 'react-firebaseui';
 import firebase from 'firebase';
+import { loginRequest, tokenSetRequest } from '../../action/auth-actions'
 
 
 
@@ -18,6 +20,26 @@ const firebaseApp = firebase.initializeApp(config)
 
 
 class SignInScreen extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            packaged: {},
+            token: '',
+        }
+        this.handleLogin = this.handleLogin.bind(this);
+    }
+
+    handleLogin(result) {
+        // ************** grabbing token from local **************
+        let token = JSON.parse(localStorage.getItem('firebase:authUser:AIzaSyBl19lQkKFQiGh9V4ZTFLSRVftqGLZw-Y8:[DEFAULT]'));
+        this.props.tokenSet(token.stsTokenManager.accessToken)
+
+        // ************** creating user from firebase oauth return **************
+        let combined = {}
+        combined.username = result.displayName
+        combined.email = result.email
+        this.props.loginRequest(combined);
+    }
     // Configure FirebaseUI.
     render() {
         const uiConfig = {
@@ -28,11 +50,13 @@ class SignInScreen extends React.Component {
             signInSuccessUrl: '/',
             // We will display Google and Facebook as auth providers.
             signInOptions: [
-
+                firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
                 firebase.auth.EmailAuthProvider.PROVIDER_ID
             ],
             callbacks: {
-                signInSuccess: () => {
+                signInSuccess: (result) => {
+                    this.handleLogin(result);
                     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
                         .then(function () {
                             // Existing and future Auth states are now persisted in the current
@@ -41,6 +65,7 @@ class SignInScreen extends React.Component {
                             // ...
                             // New sign-in will be persisted with session persistence.
                             return firebase.auth().signInWithEmailAndPassword(email, password);
+
                         })
                         .catch(function (error) {
                             // Handle Errors here.
@@ -60,4 +85,14 @@ class SignInScreen extends React.Component {
     }
 }
 
-export default SignInScreen
+let mapStateToProps = state => ({
+    auth: state.auth,
+    user: state.user,
+});
+
+let mapDispatchToProps = dispatch => ({
+    loginRequest: (user) => dispatch(loginRequest(user)),
+    tokenSet: (token) => dispatch(tokenSetRequest(token)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignInScreen);
