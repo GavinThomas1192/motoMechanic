@@ -3,6 +3,7 @@ import React from 'react';
 import { Button } from 'react-bootstrap'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import * as utils from '../../lib/utils'
 
 
 class BikeCreate extends React.Component {
@@ -15,8 +16,8 @@ class BikeCreate extends React.Component {
     let year = props.bikeUpdate ? props.bikeUpdate.year : '';
     let color = props.bikeUpdate ? props.bikeUpdate.color : '';
     let mileage = props.bikeUpdate ? props.bikeUpdate.mileage : '';
-
-
+    let bikeAvatar = props.bikeUpdate ? props.bikeUpdate.bikeAvatar : ''
+    let preview = props.bikeUpdate ? props.bikeUpdate.preview : ''
     let id = props.bikeUpdate ? props.bikeUpdate.id : 1;
 
     this.state = {
@@ -27,6 +28,8 @@ class BikeCreate extends React.Component {
       color,
       mileage,
       id,
+      bikeAvatar,
+      preview,
       editing: false,
       completed: false,
     };
@@ -40,6 +43,15 @@ class BikeCreate extends React.Component {
     this.setState({
       [e.target.name]: e.target.value,
     });
+    if (name === 'bikeAvatar') {
+      let { files } = e.target;
+      let bikeAvatar = files[0];
+      this.setState({ bikeAvatar });
+
+      utils.photoToDataUrl(bikeAvatar)
+        .then(preview => this.setState({ preview }))
+        .catch(console.error);
+    }
   }
 
   handleSubmit(e) {
@@ -59,6 +71,7 @@ class BikeCreate extends React.Component {
 
 
   render() {
+    console.log(this.state)
     return (
       <div>
 
@@ -126,6 +139,18 @@ class BikeCreate extends React.Component {
               onChange={this.handleChange}
             /><br />
 
+            <h3>Upload a photo</h3>
+            <img src={this.state.preview} style={{ 'width': '25%' }} />
+            <TextField
+
+              multiLine={false}
+              rows={1}
+              name='bikeAvatar'
+              type='file'
+              value={this.state.bikeAvatar}
+              onChange={this.handleChange}
+            /><br />
+
           </div>
           <div className='inputContainer'>
 
@@ -135,7 +160,7 @@ class BikeCreate extends React.Component {
             <RaisedButton label={this.props.buttonText} primary={true} type='submit' />
           </div>
         </form>
-      </div>
+      </div >
     );
   }
 }
