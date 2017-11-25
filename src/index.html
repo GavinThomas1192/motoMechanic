@@ -6,43 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MotoMechanic</title>
-    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
-    <script>
-        // Initialize Firebase
-        var config = {
-            apiKey: `${process.env.APIKEY}`,
-            authDomain: `https://motomechanic-dd66a.firebaseapp.com`,
-            databaseURL: `https://motomechanic-dd66a.firebaseio.com`,
-            projectId: `${process.env.PROJECTID}`,
-            storageBucket: `${process.env.STORAGEBUCKET}`,
-            messagingSenderId: `${process.env.MESSINGSENDERID}`
-        };
-        firebase.initializeApp(config);
-    </script>
-    <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
-    <script type="text/javascript">
-        // FirebaseUI config.
-        var uiConfig = {
-            signInSuccessUrl: '<url-to-redirect-to-on-success>',
-            signInOptions: [
-                // Leave the lines as is for the providers you want to offer your users.
-                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-                firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-                firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-                firebase.auth.GithubAuthProvider.PROVIDER_ID,
-                firebase.auth.EmailAuthProvider.PROVIDER_ID,
-                firebase.auth.PhoneAuthProvider.PROVIDER_ID
-            ],
-            // Terms of service url.
-            tosUrl: '<your-tos-url>'
-        };
 
-        // Initialize the FirebaseUI Widget using Firebase.
-        var ui = new firebaseui.auth.AuthUI(firebase.auth());
-        // The start method will wait until the DOM is loaded.
-        ui.start('#firebaseui-auth-container', uiConfig);
-    </script>
 </head>
 
 <body>

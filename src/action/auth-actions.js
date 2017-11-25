@@ -1,5 +1,4 @@
 import superagent from 'superagent';
-let database = firebase.database();
 
 export const userSet = user => ({
     type: 'USER_SET',
@@ -31,9 +30,9 @@ export const tokenSetRequest = token => dispatch => {
 
 export const loginRequest = user => dispatch => {
     dispatch(userSet(user));
-    database.ref('users/' + user.userID).set({
-        user
-    });
+    // database.ref('users/' + user.userID).set({
+    //     user
+    // });
 };
 
 export const bikeCreateRequest = bike => (dispatch, getState) => {
