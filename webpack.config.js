@@ -12,6 +12,7 @@ const ExtractPlugin = require('extract-text-webpack-plugin');
 let plugins = [
     new EnvironmentPlugin(['NODE_ENV']),
     new ExtractPlugin('bundle-[hash].css'),
+    new ExtractPlugin('./bundle.css'),
     new HtmlPlugin({ template: `${__dirname}/src/index.html` }),
     new DefinePlugin({
         __DEBUG__: JSON.stringify(!production),
@@ -53,6 +54,35 @@ module.exports = {
             {
                 test: /\.scss$/,
                 loader: ExtractPlugin.extract(['css-loader', 'sass-loader']),
+            },
+            {
+                test: /\.css$/,
+                exclude: [/\.global\./, /node_modules/],
+                loader: ExtractPlugin.extract(
+                    {
+                        fallback: 'style-loader',
+                        use: [
+                            {
+                                loader: 'css-loader',
+                                options: {
+                                    importLoaders: 1,
+                                    modules: true,
+                                    autoprefixer: true,
+                                    minimize: true,
+                                    localIdentName: '[name]__[local]___[hash:base64:5]'
+                                }
+                            }
+                        ]
+                    })
+            },
+            {
+                test: /\.css/,
+                include: [/\.global\./, /node_modules/],
+                loader: ExtractPlugin.extract(
+                    {
+                        fallback: 'style-loader',
+                        use: ['css-loader']
+                    })
             },
             {
                 test: /\.(woff|woff2|ttf|eot|glyph|\.svg)$/,
