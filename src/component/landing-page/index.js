@@ -13,12 +13,7 @@ class LandingPage extends React.Component {
     }
     render() {
 
-        const config = {
-            apiKey: __API_KEY__,
-            authDomain: __AUTH_DOMAIN__,
-            // ...
-        };
-        firebase.initializeApp(config);
+
 
         const responseFacebook = (response) => {
             //I commented this out for safety 
@@ -26,24 +21,12 @@ class LandingPage extends React.Component {
             this.props.tokenSet(response.accessToken);
             this.props.login(response);
         }
-        const uiConfig = {
-            // Popup signin flow rather than redirect flow.
-            signInFlow: 'popup',
-            // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
-            signInSuccessUrl: '/',
-            // We will display Google and Facebook as auth providers.
-            signInOptions: [
-                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-                firebase.auth.FacebookAuthProvider.PROVIDER_ID
-            ]
-        };
+
 
         return (
             <div>
-                <h1>My App</h1>
-                <p>Please sign-in:</p>
-                <FirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
-                //Here we can change autoload=True and they won't have to ever press login on their own!
+
+
                 <FacebookLogin
                     appId={__FACEBOOK_APP_ID__}
                     autoLoad={false}

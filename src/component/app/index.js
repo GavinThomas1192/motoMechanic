@@ -6,6 +6,7 @@ import Home from '../home'
 import BikeContainer from '../bike-container'
 import NavBar from '../navbar'
 import LandingPage from '../landing-page'
+import SignInScreen from '../firebase-login'
 import { userFetchRequest, tokenSetRequest } from '../../action/auth-actions';
 
 
@@ -29,6 +30,7 @@ class App extends React.Component {
 
                 <BrowserRouter>
                     <div>
+                        <SignInScreen />
                         {this.props.auth ?
                             <NavBar /> :
                             undefined}
