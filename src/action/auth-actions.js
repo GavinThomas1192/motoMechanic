@@ -1,5 +1,9 @@
 import superagent from 'superagent';
 
+
+
+
+
 export const userSet = user => ({
     type: 'USER_SET',
     payload: user,
@@ -32,9 +36,10 @@ export const tokenSetRequest = token => dispatch => {
 
 export const loginRequest = user => dispatch => {
     dispatch(userSet(user));
-    // database.ref('users/' + user.userID).set({
-    //     user
-    // });
+
+    firebase.database().ref('users/' + user.uid).set({ user });
+    console.log('INSIDE FIREBASEE DB SET', user)
+
 };
 
 export const bikeCreateRequest = bike => (dispatch, getState) => {
