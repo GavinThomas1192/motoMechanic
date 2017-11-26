@@ -3,6 +3,7 @@
 
 ### To get up and running 
     * npm i
+    * npm run watch
     * navigate to localhost:8080
 
 ### You need to create a .dev.env file inside the src folder
