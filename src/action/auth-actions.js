@@ -1,5 +1,9 @@
 import superagent from 'superagent';
 
+
+
+
+
 export const userSet = user => ({
     type: 'USER_SET',
     payload: user,
@@ -21,6 +25,8 @@ export const tokenSet = token => ({
     payload: token,
 });
 
+
+
 export const tokenSetRequest = token => dispatch => {
     return new Promise((resolve, reject) => {
         resolve(dispatch(tokenSet(token)));
@@ -29,10 +35,15 @@ export const tokenSetRequest = token => dispatch => {
 
 
 export const loginRequest = user => dispatch => {
-    dispatch(userSet(user));
-    // database.ref('users/' + user.userID).set({
-    //     user
-    // });
+    let name = user.username
+    firebase.database().ref('users/' + user.uid).set({
+        account: user
+
+    })
+
+    dispatch(userSet(user))
+    console.log('INSIDE FIREBASEE DB SET', user)
+
 };
 
 export const bikeCreateRequest = bike => (dispatch, getState) => {
@@ -57,4 +68,6 @@ export const bikeDeleteRequest = bike => (dispatch, getState) => {
     console.log('_bike_DELETE_INCOMING_bike', bike)
     dispatch(bikeDelete(bike));
 }
+
+export const tokenDelete = () => ({ type: 'TOKEN_DELETE', payload: null });
 

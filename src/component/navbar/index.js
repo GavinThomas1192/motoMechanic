@@ -7,7 +7,10 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import AppBar from 'material-ui/AppBar';
-
+import { tokenDelete } from '../../action/auth-actions'
+import IconButton from 'material-ui/IconButton';
+import FontIcon from 'material-ui/FontIcon';
+import IconMenu from 'material-ui/IconMenu';
 
 
 
@@ -18,11 +21,17 @@ class NavBar extends React.Component {
 
         this.handleClose = this.handleClose.bind(this)
         this.handleToggle = this.handleToggle.bind(this)
+        this.handleLogout = this.handleLogout.bind(this);
     }
 
     handleToggle() {
 
         this.setState({ open: !this.state.open });
+    }
+
+    handleLogout() {
+        this.props.logoutUser();
+        localStorage.clear();
     }
 
     handleClose() {
@@ -35,6 +44,10 @@ class NavBar extends React.Component {
 
 
     render() {
+        {/* iconElementRight={<IconButton>
+            <FontIcon className="material-icons">reorder</FontIcon>
+        </IconButton>} */}
+        {/* onRightIconButtonTouchTap={this.handleLogout} */ }
         return (
             <div >
                 {/* ***** NAVBAR FOR DRAWER ***** */}
@@ -43,9 +56,22 @@ class NavBar extends React.Component {
                     style={{ backgroundColor: '#757575' }}
                     title="MotoMechanic"
                     onLeftIconButtonTouchTap={this.handleToggle}
-                    onRightIconButtonTouchTap={this.handleToggle}
-                    iconElementRight={<img src={this.props.user.picture.data.url} />}
+                    iconElementRight={
+                        <IconMenu
+                            iconButtonElement={
+                                <IconButton><FontIcon className="material-icons">reorder</FontIcon></IconButton>
+                            }
+                            targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+                            anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+                        >
+                            <MenuItem primaryText="Refresh" />
+                            <MenuItem primaryText="Help" />
+                            <MenuItem onClick={() => this.handleLogout()} primaryText="Sign out" />
+                        </IconMenu>
+                    }
+                />}
                 />
+                    {/* iconElementRight={<img src={this.props.user.picture.data.url  */}
                 <div>
 
                     <Drawer
@@ -78,7 +104,7 @@ let mapStateToProps = state => ({
 });
 
 let mapDispatchToProps = dispatch => ({
-
+    logoutUser: () => dispatch(tokenDelete()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
