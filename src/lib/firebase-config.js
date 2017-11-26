@@ -1,5 +1,5 @@
-import * as firebase from 'firebase'
 
+import * as firebase from 'firebase';
 const config = {
     apiKey: __API_KEY__,
     authDomain: __AUTH_DOMAIN__,
@@ -8,11 +8,8 @@ const config = {
     storageBucket: __STORAGE_BUCKET__,
     messagingSenderId: __MESSAGING_SENDER_ID__,
 };
-
-export const firebaseApp = firebase.initializeApp(config)
-export const database = firebase.database(firebaseApp)
-
-
+firebase.initializeApp(config);
+export default firebase;
 
 
 

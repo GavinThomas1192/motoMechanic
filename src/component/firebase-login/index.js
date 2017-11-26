@@ -1,21 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { FirebaseAuth } from 'react-firebaseui';
-import firebase from 'firebase';
-import * as firebaseUtils from '../../lib/firebase-config'
+import firebase from '../../lib/firebase-config'
 import { loginRequest, tokenSetRequest } from '../../action/auth-actions'
 
 
 
 
 
-// Configure Firebase.
-// const config = {
-//     apiKey: __API_KEY__,
-//     authDomain: __AUTH_DOMAIN__,
-//     databaseURL: __DATABASE_URL__,
-// };
-// const firebaseApp = firebase.initializeApp(config)
+
 
 
 
@@ -60,7 +53,8 @@ class SignInScreen extends React.Component {
                 signInSuccess: (result) => {
                     this.handleLogin(result);
                     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-                        .then(function () {
+                        .then(function (result) {
+                            console.log('results are in', result)
                             // Existing and future Auth states are now persisted in the current
                             // session only. Closing the window would clear any existing state even
                             // if a user forgets to sign out.
@@ -81,7 +75,7 @@ class SignInScreen extends React.Component {
             <div>
                 <h1>TESTING FIREBASE OAUTH</h1>
 
-                <FirebaseAuth uiConfig={uiConfig} firebaseAuth={firebaseUtils.firebaseApp.auth()} />
+                <FirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
             </div>
         );
     }
