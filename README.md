@@ -21,7 +21,14 @@
 ### Because Firebase is a cloud service backend. We need to spin up an instance of it locally to write backend function responses.
     * Navigate to the functions folder in terminal
     * npm run serve
+    * This will provide a link where you can test the routes with an appliction like Postman, or setup testing .dev.env file that replaces the __DATABASE_URL__ with the testing url recieved from running npm run serve.
     * Take a look at the package.json inside functions for more commands
+
+    * You can also test functions quickly before deploying them to the cloud with test data
+        * npm run serve
+        * Call you functions to test
+        * Example
+            * sendWelcomeEmail(data)
        
 
 ##### Protected branch === master
