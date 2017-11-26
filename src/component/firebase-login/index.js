@@ -6,13 +6,6 @@ import { loginRequest, tokenSetRequest } from '../../action/auth-actions'
 
 
 
-
-
-
-
-
-
-
 class SignInScreen extends React.Component {
     constructor(props) {
         super(props);
@@ -24,12 +17,13 @@ class SignInScreen extends React.Component {
     }
 
     handleLogin(result) {
+
         // ************** grabbing token from local **************
-        let token = JSON.parse(localStorage.getItem('firebase:authUser:AIzaSyBl19lQkKFQiGh9V4ZTFLSRVftqGLZw-Y8:[DEFAULT]'));
+        let token = JSON.parse(localStorage.getItem(`firebase:authUser:` + __API_KEY__ + `:[DEFAULT]`));
         this.props.tokenSet(token.stsTokenManager.accessToken)
 
+
         // ************** creating user from firebase oauth return **************
-        console.log('hereererereererere', result);
         let combined = {}
         combined.uid = result.uid
         combined.username = result.displayName
