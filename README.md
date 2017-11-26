@@ -20,9 +20,14 @@
 
 ### Because Firebase is a cloud service backend. We need to spin up an instance of it locally to write backend function responses.
     * Navigate to the functions folder in terminal
-    * npm run serve
+    * $ firebase login
+    * $ firebase functions:config:get > .runtimeconfig.json
+    * $ npm run shell
+    * Call your functions to test
+        * Example
+            * sendWelcomeEmail(mockData)
+            
     * Take a look at the package.json inside functions for more commands
-       
 
 ##### Protected branch === master
     * Please submit a PR with info on changes
