@@ -38,9 +38,9 @@ class NavBar extends React.Component {
         this.setState({ open: false });
     }
 
-    componentWillReceiveProps(nextProps) {
-        console.log('HEHEHEHEH', nextProps);
-    }
+    // componentWillReceiveProps(nextProps) {
+    //     console.log('HEHEHEHEH', nextProps);
+    // }
 
 
     render() {

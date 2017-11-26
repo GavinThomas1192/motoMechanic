@@ -1,9 +1,6 @@
 import superagent from 'superagent';
 
 
-
-
-
 export const userSet = user => ({
     type: 'USER_SET',
     payload: user,
@@ -48,7 +45,7 @@ export const loginRequest = user => dispatch => {
                 console.log('SET NEW USER!');
             })
 
-                : console.log('USER ALREADY EXISTS')
+                : dispatch(userSet(username))
         }
     });
 
