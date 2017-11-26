@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { FirebaseAuth } from 'react-firebaseui';
-// import firebase from 'firebase';
 import firebase from '../../lib/firebase-config'
 import { loginRequest, tokenSetRequest } from '../../action/auth-actions'
 
