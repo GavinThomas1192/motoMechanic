@@ -52,6 +52,7 @@ class BikeContainer extends React.Component {
     this.setState({ clickedMenuBike: clickedBike, toggleSingleBike: true })
   }
   render() {
+    console.log('INSIDE BIKE COMP', this.props)
     const actions = [
       <FlatButton
         label="Close"
@@ -73,10 +74,24 @@ class BikeContainer extends React.Component {
         onClick={this.toggleCreateBike}
       />,
     ];
+    const singleActions = [
+      <FlatButton
+        label="Close"
+        primary={true}
+        keyboardFocused={true}
+        onClick={this.handleClose}
+      />,
+      <FlatButton
+        label="Edit"
+        primary={true}
+        keyboardFocused={true}
+        onClick={this.toggleCreateForm}
+      />,
+    ];
     return (
       <div>
         {/* ***** POPUP IF NO EXISTING BIKES ***** */}
-        {!this.props.user.allBikes ?
+        {!this.props.user.account.allBikes ?
           <div>
             <Dialog
               title="It looks like you have no bikes! Lets change that."
@@ -103,11 +118,56 @@ class BikeContainer extends React.Component {
             onComplete={this.props.bikeCreate}
             toggle={this.toggleCreateBike} />
         </Dialog>
+
+        {/* ***** SINGLE BIKE VIEW AFTER CLICKING FROM LIST***** */}
+        <Dialog
+          title="Bike Stats"
+          actions={singleActions}
+          modal={false}
+          open={this.state.toggleSingleBike}
+          onRequestClose={this.handleClose}
+          autoScrollBodyContent={true}
+
+        >
+
+          <div>
+            <pre>
+              <h2>{this.state.clickedMenuBike.make}</h2>
+              <p>{this.state.clickedMenuBike.model}</p>
+              <p>{this.state.clickedMenuBike.year}</p>
+              <p>{this.state.clickedMenuBike.name}</p>
+              <p>{this.state.clickedMenuBike.mileage}</p>
+              <p>{this.state.clickedMenuBike.color}</p>
+
+            </pre>
+          </div>
+          {/* ***** EDIT POPUP AFTER CLICKING MENU ITEM ***** */}
+          <Dialog
+            title="Update This Note"
+            actions={singleActions}
+            modal={false}
+            open={this.state.toggleBikeCreate}
+            onRequestClose={this.toggleCreateBike}
+            autoScrollBodyContent={true}
+
+          >
+            <BikeCreate
+              buttonText={'Update Bike'}
+              onComplete={this.props.bikeUpdate}
+              simulateMenuClick={this.handleSingleBike}
+              toggle={this.toggleCreateBike}
+              bikeUpdate={this.state.clickedMenuBike} />
+          </Dialog>
+
+        </Dialog>
         {/* ***** BIKE LIST IF THEY HAVE BIKES ***** */}
-        {this.props.user.allBikes ?
-          <BikeList
-            allBikes={this.props.user.allBikes} /> : undefined}
-      </div>
+        {
+          this.props.user.account.allBikes ?
+            <BikeList
+              allBikes={this.props.user.account.allBikes}
+              toggleSingleBikeView={this.handleSingleBike} /> : undefined
+        }
+      </div >
     );
   }
 }

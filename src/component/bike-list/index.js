@@ -20,7 +20,7 @@ class BikeList extends React.Component {
         <h1>Hello from the bike list component</h1>
         <List>
           {this.props.allBikes.map(ele => {
-            return <ListItem key={ele.mileage} primaryText={ele.name} />
+            return <ListItem onClick={() => this.props.toggleSingleBikeView(ele)} key={ele.mileage} primaryText={ele.name} />
           })}
         </List>
 
