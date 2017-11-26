@@ -38,7 +38,6 @@ export const loginRequest = user => dispatch => {
     let name = user.username
     firebase.database().ref('users/' + user.uid).set({
         account: user
-
     })
 
     dispatch(userSet(user))
@@ -54,6 +53,10 @@ export const bikeCreateRequest = bike => (dispatch, getState) => {
     user.allBikes.push(bike);
     console.log('_AFTER COMBINING_', user)
 
+    firebase.database().ref('users/' + user.uid).set({
+        account: user
+
+    })
     dispatch(userUpdate(user));
 }
 
