@@ -8,7 +8,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
     console.log('HI')
 });
 
-exports.sendWelcomeEmail = functions.auth.user().onCreate(event, response => {
+exports.sendWelcomeEmail = functions.auth.user().onCreate((event, response) => {
     response.send('User Created')
 });
 
