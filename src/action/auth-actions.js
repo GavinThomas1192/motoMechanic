@@ -1,4 +1,5 @@
 import superagent from 'superagent';
+// import firebase from '../lib/firebase-config'
 
 
 
@@ -35,9 +36,13 @@ export const tokenSetRequest = token => dispatch => {
 
 
 export const loginRequest = user => dispatch => {
-    dispatch(userSet(user));
+    let name = user.username
+    firebase.database().ref('users/' + user.uid).set({
+        account: user
 
-    firebase.database().ref('users/' + user.uid).set({ user });
+    })
+
+    dispatch(userSet(user))
     console.log('INSIDE FIREBASEE DB SET', user)
 
 };
