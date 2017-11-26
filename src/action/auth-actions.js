@@ -35,10 +35,22 @@ export const tokenSetRequest = token => dispatch => {
 
 
 export const loginRequest = user => dispatch => {
+    // ******** Here we need to check if user already exists so that we dont overwrite their old data ********
     let name = user.username
-    firebase.database().ref('users/' + user.uid).set({
-        account: user
-    })
+    firebase.database().ref('users/' + user.uid).once('value').then(function (snapshot) {
+        let username = snapshot.val();
+        console.log('LOOOKHERE GAVIN', username);
+        {
+            // ******** If theres no user already lets set it to the database ********
+            username === null ? firebase.database().ref('users/' + user.uid).set({
+                account: user
+            }).then(function () {
+                console.log('SET NEW USER!');
+            })
+
+                : console.log('USER ALREADY EXISTS')
+        }
+    });
 
     dispatch(userSet(user))
     console.log('INSIDE FIREBASEE DB SET', user)
