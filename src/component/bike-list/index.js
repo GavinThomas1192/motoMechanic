@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import Avatar from 'material-ui/Avatar';
 import { List, ListItem } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
@@ -15,13 +16,18 @@ class BikeList extends React.Component {
     super(props)
   }
   render() {
+    let listOfbikes = []
+    listOfbikes.push(this.props.user.allBikes);
+    console.log('&&&&&&list of bikes', listOfbikes)
     return (
       <div>
         <h1>Hello from the bike list component</h1>
+
         <List>
-          {this.props.allBikes.map(ele => {
-            return <ListItem onClick={() => this.props.toggleSingleBikeView(ele)} key={ele.mileage} primaryText={ele.name} />
-          })}
+
+          {/* {listOfbikes[0].map(ele => {
+            return <ListItem onClick={() => this.props.toggleSingleBikeView(ele.bike)} key={ele[0].bike.mileage} primaryText={ele[0].bike.name} />
+          })} */}
         </List>
 
       </div>
@@ -29,4 +35,16 @@ class BikeList extends React.Component {
   }
 }
 
-export default BikeList;
+let mapStateToProps = state => ({
+  auth: state.auth,
+  user: state.user,
+});
+
+let mapDispatchToProps = dispatch => ({
+
+  bikeCreate: (bike) => dispatch(bikeCreateRequest(bike)),
+  bikeUpdate: (bike) => dispatch(bikeUpdateRequest(bike)),
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(BikeList);

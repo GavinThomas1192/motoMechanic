@@ -92,8 +92,9 @@ class BikeContainer extends React.Component {
     ];
     return (
       <div>
+        <RaisedButton primary={true} label="New bike" onClick={this.toggleCreateBike} />
         {/* ***** POPUP IF NO EXISTING BIKES ***** */}
-        {!this.props.user.allBikes ?
+        {this.props.user.allBikes == null || this.props.user.allBikes == null ?
           <div>
             <Dialog
               title="It looks like you have no bikes! Lets change that."
@@ -117,7 +118,7 @@ class BikeContainer extends React.Component {
         >
           <BikeCreate
             buttonText={'Submit'}
-            onComplete={this.props.bikeCreate}
+            onComplete={this.props.user.allBikes ? this.props.bikeUpdate : this.props.bikeCreate}
             toggle={this.toggleCreateBike} />
         </Dialog>
 
@@ -164,9 +165,9 @@ class BikeContainer extends React.Component {
         </Dialog>
         {/* ***** BIKE LIST IF THEY HAVE BIKES ***** */}
         {
-          this.props.user.account.allBikes ?
+          this.props.user.allBikes ?
             <BikeList
-              allBikes={this.props.user.account.allBikes}
+
               toggleSingleBikeView={this.handleSingleBike} /> : undefined
         }
       </div >
