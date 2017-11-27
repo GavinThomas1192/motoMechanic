@@ -57,11 +57,14 @@ export const loginRequest = user => dispatch => {
             // ******** If theres no user already lets set it to the database ********
             username === null ? firebase.database().ref('users/' + user.uid).set({
                 account: user
-            }).then(function () {
-                dispatch(userSet(user))
-                console.log('SET NEW USER!');
-            })
+            }).then(() => {
+                firebase.database().ref('users/' + user.uid).once('value').then(function (snapshot) {
+                    let updatedUser = snapshot.val();
+                    dispatch(userSet(updatedUser))
+                    console.log('SET NEW USER!');
+                })
 
+            })
                 : dispatch(userSet(username))
         }
     });
@@ -96,37 +99,66 @@ export const facebookLoginRequest = user => dispatch => {
 export const bikeCreateRequest = bike => (dispatch, getState) => {
     // ******** GET STATE TO REF USER UID ********
     let { user } = getState();
+    let username;
     console.log('INSIDE BIKE CREATE USER', user)
-    // ******** SET BIKE FOR FIRST TIME ********
-    firebase.database().ref('users/' + user.account.uid + '/allBikes').push().set({
+
+    // ******** SET BIKE FOR FIRST TIME AND STORE KEY REFERENCE FOR BIKES*******
+    let groupId = firebase.database().ref().child('users/' + user.uid + '/allBikes').push().key;
+    firebase.database().ref('users/' + user.account.uid + '/allBikes' + '/' + groupId).set({
         bike
     }).then(() => {
-        // ******** INITIATE UPDATE REDUX STORE LOCALLY ********
+        // ******** INITIATE UPDATE REDUX STORE LOCALLY FOR NEW ENTIRE USER WITH NEW ALLBIKE LIST ********
         firebase.database().ref('users/' + user.account.uid).once('value').then(function (snapshot) {
-            let username = snapshot.val();
+            username = snapshot.val();
+            console.log('FIRST UERSNAME', username)
+            // ******** ATTACH ALLBIKE KEY/ID TO USER OBJECT ********
+            username.account.bikeGroupId = []
+            username.account.bikeGroupId.push(groupId)
             dispatch(userSet(username))
         })
+            .then(() => {
+                // ******** UPDATE USER OBJECT IN DATABASE WITH ALLBIKE KEY/ID ********
+                let account = username.account
+                let allBikes = username.allBikes
+                firebase.database().ref('users/' + username.account.uid).set({
+                    account,
+                    allBikes
+                })
+
+            })
     })
 }
 
-
 export const bikeUpdateRequest = bike => (dispatch, getState) => {
     let { user } = getState();
+    let username;
+
     console.log('_bike_UPDATE_INCOMING_bike', bike)
-    let allBikesReference = firebase.database().ref('users/' + user.account.uid + '/allBikes').push();
-    allBikesReference.set({
+    let groupId = firebase.database().ref().child('users/' + user.uid + '/allBikes').push().key;
+    firebase.database().ref('users/' + user.account.uid + '/allBikes' + '/' + groupId).set({
         bike
     }).then(() => {
-        // ******** INITIATE UPDATE REDUX STORE LOCALLY ********
-        firebase.database().ref('users/' + user.account.uid + '/allBikes').once('value').then(function (bikeSnapshot) {
-            let bikeList = bikeSnapshot.val();
-            console.log('THIS IS BIKE LIST FROM ACTIONS', bikeList)
-        })
-    }).then(() => {
-        // ******** INITIATE UPDATE REDUX STORE LOCALLY ********
-        firebase.database().ref('users/' + user.account.uid).once('value').then(function (secondSnapshot) {
-            let secondUsername = secondSnapshot.val();
-            dispatch(userSet(secondUsername))
+        firebase.database().ref('users/' + user.account.uid).once('value').then(function (snapshot) {
+            username = snapshot.val();
+            console.log('FIRST UERSNAME', username)
+            // ******** ATTACH ALLBIKE KEY/ID TO USER OBJECT ********
+            username.account.bikeGroupId.push(groupId)
+            console.log('hohohohohoohoh', username.account.bikeGroupId)
+        }).then(() => {
+            // ******** UPDATE USER OBJECT IN DATABASE WITH ALLBIKE KEY/ID ********
+            let account = username.account
+            let allBikes = username.allBikes
+            firebase.database().ref('users/' + username.account.uid).set({
+                account,
+                allBikes
+            })
+        }).then(() => {
+            // ******** INITIATE UPDATE REDUX STORE LOCALLY ********
+            firebase.database().ref('users/' + user.account.uid).once('value').then(function (secondSnapshot) {
+                let secondUsername = secondSnapshot.val();
+                dispatch(userSet(secondUsername))
+            })
+
         })
     })
 }
