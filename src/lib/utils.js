@@ -6,3 +6,5 @@ export const photoToDataUrl = file => {
         return file ? reader.readAsDataURL(file) : reject(new Error('USAGE ERROR; requires file'));
     });
 };
+
+export const renderIf = (test, component) => test ? component : undefined;
