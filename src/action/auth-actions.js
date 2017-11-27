@@ -53,6 +53,28 @@ export const loginRequest = user => dispatch => {
     console.log('INSIDE FIREBASEE DB SET', user)
 
 };
+export const facebookLoginRequest = user => dispatch => {
+    // ******** Here we need to check if user already exists so that we dont overwrite their old data ********
+    let name = user.name
+    firebase.database().ref('users/' + user.id).once('value').then(function (snapshot) {
+        let username = snapshot.val();
+        console.log('LOOOKHERE GAVIN', username);
+        {
+            // ******** If theres no user already lets set it to the database ********
+            username === null ? firebase.database().ref('users/' + user.id).set({
+                account: user
+            }).then(function () {
+                console.log('SET NEW USER!');
+            })
+
+                : dispatch(userSet(username))
+        }
+    });
+
+    dispatch(userSet(user))
+    console.log('INSIDE FIREBASEE DB SET', user)
+
+};
 
 export const bikeCreateRequest = bike => (dispatch, getState) => {
     let { user } = getState();

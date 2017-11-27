@@ -17,6 +17,12 @@
         * STORAGEBUCKET= "",
         * MESSAGINGSENDERID= "xxxxxx"
 
+### You can access the env variables from the admin account like so
+
+    * const envName = functions.config().enviroment.envName;
+    ** List of env names are 
+    *** apikey, databaseurl, projectid, authdomain, messagingsenderid, facebookappid, storagebucket
+
 
 ### Because Firebase is a cloud service backend. We need to spin up an instance of it locally to write backend function responses.
     * Navigate to the functions folder in terminal
