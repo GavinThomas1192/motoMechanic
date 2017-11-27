@@ -72,6 +72,7 @@ class SignInScreen extends React.Component {
             //I commented this out for safety 
             console.log('HIHIHIIIH', response);
             this.props.tokenSet(response.accessToken);
+            localStorage.setItem(`firebase:authUser:` + __API_KEY__ + `:[DEFAULT]`, response.accessToken)
             this.props.facebookLoginRequest(response);
         }
         return (
