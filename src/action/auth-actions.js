@@ -48,6 +48,7 @@ export const userFetchRequest = () => dispatch => {
 };
 
 
+// ******** THIS IS THE LOGIN FOR EMAIL AND PASSWORD ********
 export const loginRequest = user => dispatch => {
     // ******** Here we need to check if user already exists so that we dont overwrite their old data ********
     firebase.database().ref('users/' + user.uid).once('value').then(function (snapshot) {
@@ -65,6 +66,7 @@ export const loginRequest = user => dispatch => {
                 })
 
             })
+                // ******** OTHERWISE UPDATE REDUX STORE LOCALLY ********
                 : dispatch(userSet(username))
         }
     });
@@ -73,6 +75,7 @@ export const loginRequest = user => dispatch => {
     console.log('INSIDE FIREBASEE DB SET', user)
 
 };
+// ******** NOT DONE YET, BECAUSE FACEBOOK OAUTH GIVES BACK DIFFERENT DATA OBJECT ********
 export const facebookLoginRequest = user => dispatch => {
     // ******** Here we need to check if user already exists so that we dont overwrite their old data ********
     user.uid = user.id
@@ -96,73 +99,69 @@ export const facebookLoginRequest = user => dispatch => {
 
 };
 
+
+// ******** USED ONLY WHEN FIRST CREATING A BIKE ********
 export const bikeCreateRequest = bike => (dispatch, getState) => {
-    // ******** GET STATE TO REF USER UID ********
     let { user } = getState();
+    // ******** CREATE BIKE ARRAY FOR FIRST TIME ON THE DB USER OBJECT ********
+    let allBikesCreate = [];
     let username;
-    console.log('INSIDE BIKE CREATE USER', user)
-
-    // ******** SET BIKE FOR FIRST TIME AND STORE KEY REFERENCE FOR BIKES*******
-    let groupId = firebase.database().ref().child('users/' + user.uid + '/allBikes').push().key;
-    firebase.database().ref('users/' + user.account.uid + '/allBikes' + '/' + groupId).set({
-        bike
+    allBikesCreate.push(bike);
+    // ******** GRAB SNAPSHOT OF CURRENT USER ON THE CLOUD ********
+    firebase.database().ref('users/' + user.account.uid).once('value').then(function (snapshot) {
+        username = snapshot.val();
     }).then(() => {
-        // ******** INITIATE UPDATE REDUX STORE LOCALLY FOR NEW ENTIRE USER WITH NEW ALLBIKE LIST ********
-        firebase.database().ref('users/' + user.account.uid).once('value').then(function (snapshot) {
-            username = snapshot.val();
-            console.log('FIRST UERSNAME', username)
-            // ******** ATTACH ALLBIKE KEY/ID TO USER OBJECT ********
-            username.account.bikeGroupId = []
-            username.account.bikeGroupId.push(groupId)
-            dispatch(userSet(username))
+        // ******** UPDATE USER OBJECT ON THE CLOUD WITH NEW BIKE ARRAY ********
+        username.allBikes = []
+        username.allBikes.push(bike)
+        let account = username.account
+        let allBikes = username.allBikes
+        firebase.database().ref('users/' + username.account.uid).set({
+            account,
+            allBikes
         })
-            .then(() => {
-                // ******** UPDATE USER OBJECT IN DATABASE WITH ALLBIKE KEY/ID ********
-                let account = username.account
-                let allBikes = username.allBikes
-                firebase.database().ref('users/' + username.account.uid).set({
-                    account,
-                    allBikes
-                })
-
-            })
+    }).then(() => {
+        // ******** UPDATE REDUX STORE LOCALLY WITH NEW BIKE ARRAY ********
+        firebase.database().ref('users/' + user.account.uid).once('value').then(function (snapshot) {
+            let cached = snapshot.val();
+            dispatch(userSet(cached))
+        })
     })
+
 }
 
+
+// ******** USED EVERYTIME THEY MAKE ANOTHER BIKE ********
 export const bikeUpdateRequest = bike => (dispatch, getState) => {
     let { user } = getState();
     let username;
 
-    console.log('_bike_UPDATE_INCOMING_bike', bike)
-    let groupId = firebase.database().ref().child('users/' + user.uid + '/allBikes').push().key;
-    firebase.database().ref('users/' + user.account.uid + '/allBikes' + '/' + groupId).set({
-        bike
+    // ******** GRAB SNAPSHOT OF CURRENT USER ON THE CLOUD ********
+    firebase.database().ref('users/' + user.account.uid).once('value').then(function (snapshot) {
+        username = snapshot.val();
+        console.log('FIRST UERSNAME', username)
     }).then(() => {
-        firebase.database().ref('users/' + user.account.uid).once('value').then(function (snapshot) {
-            username = snapshot.val();
-            console.log('FIRST UERSNAME', username)
-            // ******** ATTACH ALLBIKE KEY/ID TO USER OBJECT ********
-            username.account.bikeGroupId.push(groupId)
-            console.log('hohohohohoohoh', username.account.bikeGroupId)
-        }).then(() => {
-            // ******** UPDATE USER OBJECT IN DATABASE WITH ALLBIKE KEY/ID ********
-            let account = username.account
-            let allBikes = username.allBikes
-            firebase.database().ref('users/' + username.account.uid).set({
-                account,
-                allBikes
-            })
-        }).then(() => {
-            // ******** INITIATE UPDATE REDUX STORE LOCALLY ********
-            firebase.database().ref('users/' + user.account.uid).once('value').then(function (secondSnapshot) {
-                let secondUsername = secondSnapshot.val();
-                dispatch(userSet(secondUsername))
-            })
-
+        // ******** UPDATE USER OBJECT ON THE CLOUD WITH NEW BIKE ARRAY ********
+        username.allBikes.push(bike)
+        let account = username.account
+        let allBikes = username.allBikes
+        firebase.database().ref('users/' + username.account.uid).set({
+            account,
+            allBikes
         })
+    }).then(() => {
+        // ******** INITIATE UPDATE REDUX STORE LOCALLY ********
+        firebase.database().ref('users/' + user.account.uid).once('value').then(function (secondSnapshot) {
+            let secondUsername = secondSnapshot.val();
+            dispatch(userSet(secondUsername))
+        })
+
+
     })
 }
 
+
+// ******** TODO********
 export const bikeDeleteRequest = bike => (dispatch, getState) => {
     let { user } = getState();
     console.log('_bike_DELETE_INCOMING_bike', bike)
