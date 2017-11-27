@@ -33,7 +33,6 @@ export const tokenSetRequest = token => dispatch => {
 
 export const loginRequest = user => dispatch => {
     // ******** Here we need to check if user already exists so that we dont overwrite their old data ********
-    let name = user.username
     firebase.database().ref('users/' + user.uid).once('value').then(function (snapshot) {
         let username = snapshot.val();
         console.log('LOOOKHERE GAVIN', username);
@@ -42,6 +41,7 @@ export const loginRequest = user => dispatch => {
             username === null ? firebase.database().ref('users/' + user.uid).set({
                 account: user
             }).then(function () {
+                dispatch(userSet(user))
                 console.log('SET NEW USER!');
             })
 
@@ -55,7 +55,7 @@ export const loginRequest = user => dispatch => {
 };
 export const facebookLoginRequest = user => dispatch => {
     // ******** Here we need to check if user already exists so that we dont overwrite their old data ********
-    let name = user.name
+    user.uid = user.id
     firebase.database().ref('users/' + user.id).once('value').then(function (snapshot) {
         let username = snapshot.val();
         console.log('LOOOKHERE GAVIN', username);
@@ -78,11 +78,10 @@ export const facebookLoginRequest = user => dispatch => {
 
 export const bikeCreateRequest = bike => (dispatch, getState) => {
     let { user } = getState();
-    console.log('_ROUTING_NEWbike_TO_STORE_', bike)
-    console.log('_Attaching to this user_', user)
     user.allBikes = []
     user.allBikes.push(bike);
-    console.log('_AFTER COMBINING_', user)
+
+
 
     firebase.database().ref('users/' + user.uid).set({
         account: user

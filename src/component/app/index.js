@@ -20,7 +20,7 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        let token = localStorage.getItem('firebase:authUser:AIzaSyBl19lQkKFQiGh9V4ZTFLSRVftqGLZw-Y8:[DEFAULT]');
+        let token = localStorage.getItem(`firebase:authUser:` + __API_KEY__ + `:[DEFAULT]`);
         if (token) this.props.tokenSet(token);
     }
     componentDidUpdate() {
