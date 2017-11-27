@@ -53,11 +53,11 @@ class NavBar extends React.Component {
                     style={{ backgroundColor: '#757575' }}
                     title="MotoMechanic"
                     onLeftIconButtonTouchTap={this.handleToggle}
+
                     iconElementRight={
                         <IconMenu
-                            iconButtonElement={
-                                <IconButton><FontIcon className="material-icons">reorder</FontIcon></IconButton>
-                            }
+                            iconButtonElement={<IconButton><FontIcon className="material-icons">reorder</FontIcon></IconButton>}
+
                             targetOrigin={{ horizontal: 'right', vertical: 'top' }}
                             anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
                         >
@@ -65,10 +65,11 @@ class NavBar extends React.Component {
                             <MenuItem primaryText="Help" />
                             <MenuItem onClick={() => this.handleLogout()} primaryText="Sign out" />
                         </IconMenu>
-                    }
 
+
+                    }
                 />
-                {/* iconElementRight={<img src={this.props.user.picture.data.url  */}
+
                 <div>
 
                     <Drawer

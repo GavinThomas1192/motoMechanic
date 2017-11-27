@@ -35,7 +35,6 @@ class BikeContainer extends React.Component {
   }
   toggleCreateBike() {
     this.setState({ toggleBikeCreate: !this.state.toggleBikeCreate })
-    console.log('togglin')
   }
 
   handleToggle() {
@@ -51,6 +50,9 @@ class BikeContainer extends React.Component {
     console.log('_CLICKED Bike-', clickedBike)
     this.setState({ clickedMenuBike: clickedBike, toggleSingleBike: true })
   }
+
+
+
   render() {
     console.log('INSIDE BIKE COMP', this.props)
     const actions = [
@@ -91,7 +93,7 @@ class BikeContainer extends React.Component {
     return (
       <div>
         {/* ***** POPUP IF NO EXISTING BIKES ***** */}
-        {!this.props.user.account.allBikes ?
+        {!this.props.user.allBikes ?
           <div>
             <Dialog
               title="It looks like you have no bikes! Lets change that."
