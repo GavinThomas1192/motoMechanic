@@ -27,11 +27,11 @@ class LandingPage extends React.Component {
             <div>
 
 
-                <FacebookLogin
+                {/* <FacebookLogin
                     appId={__FACEBOOK_APP_ID__}
                     autoLoad={false}
                     fields="name,email,picture"
-                    callback={responseFacebook} />
+                    callback={responseFacebook} /> */}
             </div>
         )
     }

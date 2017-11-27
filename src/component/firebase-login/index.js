@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { FirebaseAuth } from 'react-firebaseui';
 import firebase from '../../lib/firebase-config'
-import { loginRequest, tokenSetRequest } from '../../action/auth-actions'
+import { loginRequest, tokenSetRequest, facebookLoginRequest } from '../../action/auth-actions'
+import FacebookLogin from 'react-facebook-login';
+
 
 
 
@@ -40,21 +42,22 @@ class SignInScreen extends React.Component {
             signInSuccessUrl: '/',
             // We will display Google and Facebook as auth providers.
             signInOptions: [
-
                 firebase.auth.EmailAuthProvider.PROVIDER_ID
+
             ],
             callbacks: {
                 signInSuccess: (result) => {
                     this.handleLogin(result);
                     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-                        .then(function (result) {
-                            console.log('results are in', result)
+                        .then(function () {
+
                             // Existing and future Auth states are now persisted in the current
                             // session only. Closing the window would clear any existing state even
                             // if a user forgets to sign out.
                             // ...
                             // New sign-in will be persisted with session persistence.
                             return firebase.auth().signInWithEmailAndPassword(email, password);
+
 
                         })
                         .catch(function (error) {
@@ -65,11 +68,22 @@ class SignInScreen extends React.Component {
                 }
             }
         };
+        const responseFacebook = (response) => {
+            //I commented this out for safety 
+            console.log('HIHIHIIIH', response);
+            this.props.tokenSet(response.accessToken);
+            this.props.facebookLoginRequest(response);
+        }
         return (
             <div>
                 <h1>TESTING FIREBASE OAUTH</h1>
 
                 <FirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+                <FacebookLogin
+                    appId={__FACEBOOK_APP_ID__}
+                    autoLoad={false}
+                    fields="name,email,picture"
+                    callback={responseFacebook} />
             </div>
         );
     }
@@ -82,6 +96,7 @@ let mapStateToProps = state => ({
 
 let mapDispatchToProps = dispatch => ({
     loginRequest: (user) => dispatch(loginRequest(user)),
+    facebookLoginRequest: (user) => dispatch(facebookLoginRequest(user)),
     tokenSet: (token) => dispatch(tokenSetRequest(token)),
 });
 

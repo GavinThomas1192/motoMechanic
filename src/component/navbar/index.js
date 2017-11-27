@@ -44,10 +44,7 @@ class NavBar extends React.Component {
 
 
     render() {
-        {/* iconElementRight={<IconButton>
-            <FontIcon className="material-icons">reorder</FontIcon>
-        </IconButton>} */}
-        {/* onRightIconButtonTouchTap={this.handleLogout} */ }
+
         return (
             <div >
                 {/* ***** NAVBAR FOR DRAWER ***** */}
@@ -69,9 +66,9 @@ class NavBar extends React.Component {
                             <MenuItem onClick={() => this.handleLogout()} primaryText="Sign out" />
                         </IconMenu>
                     }
-                />}
+
                 />
-                    {/* iconElementRight={<img src={this.props.user.picture.data.url  */}
+                {/* iconElementRight={<img src={this.props.user.picture.data.url  */}
                 <div>
 
                     <Drawer
