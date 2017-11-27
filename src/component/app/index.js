@@ -22,6 +22,9 @@ class App extends React.Component {
     componentDidMount() {
         let token = localStorage.getItem(`firebase:authUser:` + __API_KEY__ + `:[DEFAULT]`);
         if (token) this.props.tokenSet(token);
+
+        { this.props.user.uid === undefined ? this.props.userFetch() : undefined }
+
     }
     componentDidUpdate() {
         console.log('COMPONENT DID UPDATE', this.props.user)

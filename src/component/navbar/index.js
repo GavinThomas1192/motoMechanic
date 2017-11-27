@@ -1,4 +1,5 @@
 import React from 'react';
+import * as utils from '../../lib/utils'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import Encyclopedia from '../encyclopedia'
@@ -69,28 +70,29 @@ class NavBar extends React.Component {
 
                     }
                 />
+                {utils.renderIf(this.props.auth !== null,
+                    <div>
 
-                <div>
+                        <Drawer
+                            docked={false}
+                            width={200}
+                            open={this.state.open}
+                            onRequestChange={(open) => this.setState({ open })}
+                        >
 
-                    <Drawer
-                        docked={false}
-                        width={200}
-                        open={this.state.open}
-                        onRequestChange={(open) => this.setState({ open })}
-                    >
+                            <MenuItem
+                                containerElement={<Link to="/" />}
+                                onClick={this.handleClose}>Home</MenuItem>
+                            <MenuItem
+                                containerElement={<Link to="/encyclopedia" />}
+                                onClick={this.handleClose}>Encyclopedia</MenuItem>
 
-                        <MenuItem
-                            containerElement={<Link to="/" />}
-                            onClick={this.handleClose}>Home</MenuItem>
-                        <MenuItem
-                            containerElement={<Link to="/encyclopedia" />}
-                            onClick={this.handleClose}>Encyclopedia</MenuItem>
-
-                        <MenuItem onClick={this.handleClose}
-                            containerElement={<Link to="/bikes" />}
-                        >The Garage</MenuItem>
-                    </Drawer>
-                </div>
+                            <MenuItem onClick={this.handleClose}
+                                containerElement={<Link to="/bikes" />}
+                            >The Garage</MenuItem>
+                        </Drawer>
+                    </div>
+                )}
             </div>
         );
     }

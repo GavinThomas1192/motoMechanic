@@ -1,10 +1,13 @@
 import React from 'react';
+import './_firebaseLogin.scss'
+import NavBar from '../navbar'
 import { connect } from 'react-redux'
 import { FirebaseAuth } from 'react-firebaseui';
 import firebase from '../../lib/firebase-config'
 import { loginRequest, tokenSetRequest, facebookLoginRequest } from '../../action/auth-actions'
 import FacebookLogin from 'react-facebook-login';
-
+import firebaseui from 'firebaseui'
+import Paper from 'material-ui/Paper';
 
 
 
@@ -14,9 +17,21 @@ class SignInScreen extends React.Component {
         this.state = {
             packaged: {},
             token: '',
+            shadow: 5,
         }
         this.handleLogin = this.handleLogin.bind(this);
+        this.onMouseOut = this.onMouseOut.bind(this);
+        this.onMouseOver = this.onMouseOver.bind(this);
     }
+
+    onMouseOver() {
+        this.setState({ shadow: 1 });
+    }
+
+    onMouseOut() {
+        this.setState({ shadow: 5 });
+    }
+
 
     handleLogin(result) {
 
@@ -43,8 +58,8 @@ class SignInScreen extends React.Component {
             // We will display Google and Facebook as auth providers.
             signInOptions: [
                 firebase.auth.EmailAuthProvider.PROVIDER_ID
-
             ],
+            // credentialHelper: firebaseui.auth.CredentialHelper.NONE,
             callbacks: {
                 signInSuccess: (result) => {
                     this.handleLogin(result);
@@ -70,22 +85,38 @@ class SignInScreen extends React.Component {
         };
         const responseFacebook = (response) => {
             //I commented this out for safety 
-            console.log('HIHIHIIIH', response);
             this.props.tokenSet(response.accessToken);
             localStorage.setItem(`firebase:authUser:` + __API_KEY__ + `:[DEFAULT]`, response.accessToken)
             this.props.facebookLoginRequest(response);
         }
+
+        const style = {
+            margin: 'auto',
+        }
         return (
             <div>
-                <h1>TESTING FIREBASE OAUTH</h1>
+                <NavBar />
+
 
                 <FirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
-                <FacebookLogin
-                    appId={__FACEBOOK_APP_ID__}
-                    autoLoad={false}
-                    fields="name,email,picture"
-                    callback={responseFacebook} />
-            </div>
+
+                <div className='facebookLogin'>
+                    <Paper
+                        style={style}
+                        onMouseOver={this.onMouseOver}
+                        onMouseOut={this.onMouseOut}
+                        zDepth={this.state.shadow} >
+
+
+                        <FacebookLogin
+                            appId={__FACEBOOK_APP_ID__}
+                            autoLoad={false}
+                            fields="name,email,picture"
+                            callback={responseFacebook} />
+
+                    </Paper>
+                </div>
+            </div >
         );
     }
 }

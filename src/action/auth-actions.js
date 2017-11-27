@@ -30,6 +30,23 @@ export const tokenSetRequest = token => dispatch => {
     });
 };
 
+// ******* This is going to fetch the user accout and allBikes *******
+export const userFetchRequest = () => dispatch => {
+    let user = firebase.auth().currentUser;
+
+    if (user) {
+        firebase.database().ref('users/' + user.uid).once('value').then(function (snapshot) {
+            let username = snapshot.val();
+            dispatch(userSet(username))
+        });
+        console.log('FETCHED AND STORED USER', username)
+
+    } else {
+        console.log('NO USER DATA')
+    }
+
+};
+
 
 export const loginRequest = user => dispatch => {
     // ******** Here we need to check if user already exists so that we dont overwrite their old data ********
@@ -77,23 +94,41 @@ export const facebookLoginRequest = user => dispatch => {
 };
 
 export const bikeCreateRequest = bike => (dispatch, getState) => {
+    // ******** GET STATE TO REF USER UID ********
     let { user } = getState();
-    user.allBikes = []
-    user.allBikes.push(bike);
-
-
-
-    firebase.database().ref('users/' + user.uid).set({
-        account: user
-
+    console.log('INSIDE BIKE CREATE USER', user)
+    // ******** SET BIKE FOR FIRST TIME ********
+    firebase.database().ref('users/' + user.account.uid + '/allBikes').push().set({
+        bike
+    }).then(() => {
+        // ******** INITIATE UPDATE REDUX STORE LOCALLY ********
+        firebase.database().ref('users/' + user.account.uid).once('value').then(function (snapshot) {
+            let username = snapshot.val();
+            dispatch(userSet(username))
+        })
     })
-    dispatch(userUpdate(user));
 }
+
 
 export const bikeUpdateRequest = bike => (dispatch, getState) => {
     let { user } = getState();
     console.log('_bike_UPDATE_INCOMING_bike', bike)
-    dispatch(bikeUpdate(bike));
+    let allBikesReference = firebase.database().ref('users/' + user.account.uid + '/allBikes').push();
+    allBikesReference.set({
+        bike
+    }).then(() => {
+        // ******** INITIATE UPDATE REDUX STORE LOCALLY ********
+        firebase.database().ref('users/' + user.account.uid + '/allBikes').once('value').then(function (bikeSnapshot) {
+            let bikeList = bikeSnapshot.val();
+            console.log('THIS IS BIKE LIST FROM ACTIONS', bikeList)
+        })
+    }).then(() => {
+        // ******** INITIATE UPDATE REDUX STORE LOCALLY ********
+        firebase.database().ref('users/' + user.account.uid).once('value').then(function (secondSnapshot) {
+            let secondUsername = secondSnapshot.val();
+            dispatch(userSet(secondUsername))
+        })
+    })
 }
 
 export const bikeDeleteRequest = bike => (dispatch, getState) => {
