@@ -23,11 +23,13 @@ class App extends React.Component {
         let token = localStorage.getItem(`firebase:authUser:` + __API_KEY__ + `:[DEFAULT]`);
         if (token) this.props.tokenSet(token);
 
-        { this.props.user.uid === undefined ? this.props.userFetch() : undefined }
+        // { !this.props.user.uid ? this.props.userFetch() : undefined }
 
     }
     componentDidUpdate() {
         console.log('COMPONENT DID UPDATE', this.props.user)
+
+        // { !this.props.user.uid ? this.props.userFetch() : undefined }
     }
 
     render() {
@@ -37,10 +39,10 @@ class App extends React.Component {
                 <BrowserRouter>
                     <div>
 
-                        {this.props.auth ?
+                        {this.props.user.uid ?
                             <NavBar /> :
                             undefined}
-                        {!this.props.auth ?
+                        {!this.props.user.uid ?
                             <SignInScreen /> :
                             undefined}
 
