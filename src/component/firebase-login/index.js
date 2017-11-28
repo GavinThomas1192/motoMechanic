@@ -95,7 +95,7 @@ class SignInScreen extends React.Component {
         }
         return (
             <div>
-                <NavBar />
+                {/* <NavBar /> */}
 
 
                 <FirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
