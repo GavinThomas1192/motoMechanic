@@ -59,7 +59,7 @@ class SignInScreen extends React.Component {
             signInOptions: [
                 firebase.auth.EmailAuthProvider.PROVIDER_ID
             ],
-            // credentialHelper: firebaseui.auth.CredentialHelper.NONE,
+            credentialHelper: firebaseui.auth.CredentialHelper.NONE,
             callbacks: {
                 signInSuccess: (result) => {
                     this.handleLogin(result);
@@ -84,7 +84,6 @@ class SignInScreen extends React.Component {
             }
         };
         const responseFacebook = (response) => {
-            //I commented this out for safety 
             this.props.tokenSet(response.accessToken);
             localStorage.setItem(`firebase:authUser:` + __API_KEY__ + `:[DEFAULT]`, response.accessToken)
             this.props.facebookLoginRequest(response);
@@ -95,7 +94,6 @@ class SignInScreen extends React.Component {
         }
         return (
             <div>
-                {/* <NavBar /> */}
 
 
                 <FirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
