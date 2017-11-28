@@ -41,10 +41,10 @@ class App extends React.Component {
                             undefined}
                         
 
-                        <Route exact path="/encyclopedia" component={Encyclopedia} />
+                        <Route exact path="/encyclopedia" component={() => this.props.auth ? <Encyclopedia /> : <Redirect to='/login' />} />
                         <Route exact path="/login" component={() => !this.props.auth ? <SignInScreen /> : <Redirect to='/' />} />
                         <Route exact path="/" component={() => this.props.auth ? <Home /> : <Redirect to='/login' />} />
-                        <Route exact path="/bikes" component={BikeContainer} />
+                        <Route exact path="/bikes" component={() => this.props.auth ? <BikeContainer /> : <Redirect to='/login' />} />
 
 
                     </div>
