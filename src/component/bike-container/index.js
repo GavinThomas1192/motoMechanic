@@ -47,14 +47,12 @@ class BikeContainer extends React.Component {
   }
 
   handleSingleBike(clickedBike) {
-    console.log('_CLICKED Bike-', clickedBike)
     this.setState({ clickedMenuBike: clickedBike, toggleSingleBike: true })
   }
 
 
 
   render() {
-    console.log('INSIDE BIKE COMP', this.props)
     const actions = [
       <FlatButton
         label="Close"

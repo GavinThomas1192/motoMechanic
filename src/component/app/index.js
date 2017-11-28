@@ -1,13 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import Encyclopedia from '../encyclopedia'
 import Home from '../home'
 import BikeContainer from '../bike-container'
 import NavBar from '../navbar'
-import LandingPage from '../landing-page'
 import SignInScreen from '../firebase-login'
+import FourOhFour from '../four-oh-four'
 import { userFetchRequest, tokenSetRequest } from '../../action/auth-actions';
+
+
 
 
 
@@ -23,7 +25,7 @@ class App extends React.Component {
         let token = localStorage.getItem(`firebase:authUser:` + __API_KEY__ + `:[DEFAULT]`);
         if (token) this.props.tokenSet(token);
 
-        { this.props.user.uid === undefined ? this.props.userFetch() : undefined }
+        // { !this.props.user.uid ? this.props.userFetch() : undefined }
 
     }
     componentDidUpdate() {
@@ -40,15 +42,16 @@ class App extends React.Component {
                         {this.props.auth ?
                             <NavBar /> :
                             undefined}
-                        {!this.props.auth ?
-                            <SignInScreen /> :
-                            undefined}
+                        
+                        <Switch>
 
-                        <Route exact path="/encyclopedia" component={Encyclopedia} />
-                        <Route exact path="/login" component={() => !this.props.auth ? <LandingPage /> : <Redirect to='/' />} />
+                        <Route exact path="/encyclopedia" component={() => this.props.auth ? <Encyclopedia /> : <Redirect to='/login' />} />
+                        <Route exact path="/login" component={() => !this.props.auth ? <SignInScreen /> : <Redirect to='/' />} />
                         <Route exact path="/" component={() => this.props.auth ? <Home /> : <Redirect to='/login' />} />
-                        <Route exact path="/bikes" component={BikeContainer} />
+                        <Route exact path="/bikes" component={() => this.props.auth ? <BikeContainer /> : <Redirect to='/login' />} />
+                        <Route component={() => <FourOhFour/>}/>
 
+                        </Switch>
 
                     </div>
                 </BrowserRouter>

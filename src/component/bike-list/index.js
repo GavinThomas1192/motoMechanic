@@ -16,18 +16,16 @@ class BikeList extends React.Component {
     super(props)
   }
   render() {
-    let listOfbikes = []
-    listOfbikes.push(this.props.user.allBikes);
-    console.log('&&&&&&list of bikes', listOfbikes)
+
     return (
       <div>
         <h1>Hello from the bike list component</h1>
 
         <List>
 
-          {/* {listOfbikes[0].map(ele => {
-            return <ListItem onClick={() => this.props.toggleSingleBikeView(ele.bike)} key={ele[0].bike.mileage} primaryText={ele[0].bike.name} />
-          })} */}
+          {this.props.user.allBikes.map(ele => {
+            return <ListItem onClick={() => this.props.toggleSingleBikeView(ele)} key={ele.mileage} primaryText={ele.name} />
+          })}
         </List>
 
       </div>

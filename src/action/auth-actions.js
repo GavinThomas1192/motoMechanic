@@ -32,20 +32,16 @@ export const tokenSetRequest = token => dispatch => {
 
 // ******* This is going to fetch the user accout and allBikes *******
 export const userFetchRequest = () => dispatch => {
-    let user = firebase.auth().currentUser;
+    let lookupUid = JSON.parse(localStorage.getItem(`firebase:authUser:` + __API_KEY__ + `:[DEFAULT]`))
+    console.log(lookupUid.uid)
 
-    if (user) {
-        firebase.database().ref('users/' + user.uid).once('value').then(function (snapshot) {
-            let username = snapshot.val();
-            dispatch(userSet(username))
-        });
-        console.log('FETCHED AND STORED USER', username)
+    firebase.database().ref('users/' + lookupUid.uid).once('value').then(function (snapshot) {
+        let username = snapshot.val();
+        console.log('USER FETCHED', username);
+        dispatch(userSet(username));
+    })
+}
 
-    } else {
-        console.log('NO USER DATA')
-    }
-
-};
 
 
 // ******** THIS IS THE LOGIN FOR EMAIL AND PASSWORD ********
