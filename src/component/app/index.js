@@ -5,7 +5,6 @@ import Encyclopedia from '../encyclopedia'
 import Home from '../home'
 import BikeContainer from '../bike-container'
 import NavBar from '../navbar'
-import LandingPage from '../landing-page'
 import SignInScreen from '../firebase-login'
 import { userFetchRequest, tokenSetRequest } from '../../action/auth-actions';
 
@@ -28,8 +27,6 @@ class App extends React.Component {
     }
     componentDidUpdate() {
         console.log('COMPONENT DID UPDATE', this.props.user)
-
-        // { !this.props.user.uid ? this.props.userFetch() : undefined }
     }
 
     render() {
@@ -39,15 +36,13 @@ class App extends React.Component {
                 <BrowserRouter>
                     <div>
 
-                        {this.props.user.uid ?
+                        {this.props.auth ?
                             <NavBar /> :
                             undefined}
-                        {!this.props.user.uid ?
-                            <SignInScreen /> :
-                            undefined}
+                        
 
                         <Route exact path="/encyclopedia" component={Encyclopedia} />
-                        <Route exact path="/login" component={() => !this.props.auth ? <LandingPage /> : <Redirect to='/' />} />
+                        <Route exact path="/login" component={() => !this.props.auth ? <SignInScreen /> : <Redirect to='/' />} />
                         <Route exact path="/" component={() => this.props.auth ? <Home /> : <Redirect to='/login' />} />
                         <Route exact path="/bikes" component={BikeContainer} />
 
