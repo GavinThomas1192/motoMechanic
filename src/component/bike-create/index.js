@@ -1,9 +1,9 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import React from 'react';
-import { Button } from 'react-bootstrap'
+import { Button } from 'react-bootstrap';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import * as utils from '../../lib/utils'
+import * as utils from '../../lib/utils';
 
 
 class BikeCreate extends React.Component {
@@ -16,8 +16,8 @@ class BikeCreate extends React.Component {
     let year = props.bikeUpdate ? props.bikeUpdate.year : '';
     let color = props.bikeUpdate ? props.bikeUpdate.color : '';
     let mileage = props.bikeUpdate ? props.bikeUpdate.mileage : '';
-    let bikeAvatar = props.bikeUpdate ? props.bikeUpdate.bikeAvatar : ''
-    let preview = props.bikeUpdate ? props.bikeUpdate.preview : ''
+    let bikeAvatar = props.bikeUpdate ? props.bikeUpdate.bikeAvatar : '';
+    let preview = props.bikeUpdate ? props.bikeUpdate.preview : '';
     let id = props.bikeUpdate ? props.bikeUpdate.id : 1;
 
     this.state = {
@@ -65,7 +65,7 @@ class BikeCreate extends React.Component {
     }
     this.setState = ({
 
-    })
+    });
     this.props.toggle();
   }
 

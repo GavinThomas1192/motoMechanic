@@ -17,20 +17,20 @@ import { userFetchRequest, tokenSetRequest } from '../../action/auth-actions';
 
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+  constructor(props) {
+    super(props);
+  }
 
-    componentDidMount() {
-        let token = localStorage.getItem(`firebase:authUser:` + __API_KEY__ + `:[DEFAULT]`);
-        if (token) this.props.tokenSet(token);
+  componentDidMount() {
+    let token = localStorage.getItem(`firebase:authUser:` + __API_KEY__ + `:[DEFAULT]`);
+    if (token) this.props.tokenSet(token);
 
-        // { !this.props.user.uid ? this.props.userFetch() : undefined }
+    // { !this.props.user.uid ? this.props.userFetch() : undefined }
 
-    }
-    componentDidUpdate() {
-        console.log('COMPONENT DID UPDATE', this.props.user)
-    }
+  }
+  componentDidUpdate() {
+    console.log('COMPONENT DID UPDATE', this.props.user);
+  }
 
     render() {
         return (
@@ -42,7 +42,7 @@ class App extends React.Component {
                         {this.props.auth ?
                             <NavBar /> :
                             undefined}
-                        
+
                         <Switch>
 
                         <Route exact path="/encyclopedia" component={() => this.props.auth ? <Encyclopedia /> : <Redirect to='/login' />} />

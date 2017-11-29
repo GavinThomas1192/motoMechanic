@@ -13,7 +13,7 @@ import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bu
 
 class BikeList extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
   render() {
 
