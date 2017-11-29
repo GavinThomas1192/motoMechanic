@@ -52,14 +52,14 @@ class SignInScreen extends React.Component {
         const uiConfig = {
             // Popup signin flow rather than redirect flow.
             signInFlow: 'popup',
-            queryParameterForWidgetMode: 'mode',
+            // queryParameterForWidgetMode: 'mode',
             // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
-            signInSuccessUrl: '/',
+            // signInSuccessUrl: '*/',
             // We will display Google and Facebook as auth providers.
             signInOptions: [
                 firebase.auth.EmailAuthProvider.PROVIDER_ID
             ],
-            // credentialHelper: firebaseui.auth.CredentialHelper.NONE,
+            credentialHelper: firebaseui.auth.CredentialHelper.NONE,
             callbacks: {
                 signInSuccess: (result) => {
                     this.handleLogin(result);
@@ -84,7 +84,6 @@ class SignInScreen extends React.Component {
             }
         };
         const responseFacebook = (response) => {
-            //I commented this out for safety 
             this.props.tokenSet(response.accessToken);
             localStorage.setItem(`firebase:authUser:` + __API_KEY__ + `:[DEFAULT]`, response.accessToken)
             this.props.facebookLoginRequest(response);
@@ -95,7 +94,6 @@ class SignInScreen extends React.Component {
         }
         return (
             <div>
-                {/* <NavBar /> */}
 
 
                 <FirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
