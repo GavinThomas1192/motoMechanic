@@ -14,6 +14,7 @@ class BikeCreate extends React.Component {
     let make = props.bikeUpdate ? props.bikeUpdate.make : '';
     let model = props.bikeUpdate ? props.bikeUpdate.model : '';
     let year = props.bikeUpdate ? props.bikeUpdate.year : '';
+    let type = props.bikeUpdate ? props.bikeUpdate.type : '';
     let color = props.bikeUpdate ? props.bikeUpdate.color : '';
     let mileage = props.bikeUpdate ? props.bikeUpdate.mileage : '';
     let bikeAvatar = props.bikeUpdate ? props.bikeUpdate.bikeAvatar : '';
@@ -25,6 +26,7 @@ class BikeCreate extends React.Component {
       make,
       model,
       year,
+      type,
       color,
       mileage,
       id,
@@ -89,7 +91,7 @@ class BikeCreate extends React.Component {
             /><br />
             <TextField
               hintText="Suzuki, Yamaha, Etc"
-              floatingLabelText="Make"
+              floatingLabelText="Brand"
               multiLine={false}
               rows={1}
               name='make'
@@ -115,6 +117,16 @@ class BikeCreate extends React.Component {
               name='year'
               type='number'
               value={this.state.year}
+              onChange={this.handleChange}
+            /><br />
+            <TextField
+              hintText="Naked, Cruiser"
+              floatingLabelText="Type"
+              multiLine={false}
+              rows={1}
+              name='type'
+              type='text'
+              value={this.state.type}
               onChange={this.handleChange}
             /><br />
             <TextField
