@@ -1,9 +1,9 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import React from 'react';
-import { Button } from 'react-bootstrap'
+import { Button } from 'react-bootstrap';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import * as utils from '../../lib/utils'
+import * as utils from '../../lib/utils';
 
 
 class BikeCreate extends React.Component {
@@ -14,10 +14,11 @@ class BikeCreate extends React.Component {
     let make = props.bikeUpdate ? props.bikeUpdate.make : '';
     let model = props.bikeUpdate ? props.bikeUpdate.model : '';
     let year = props.bikeUpdate ? props.bikeUpdate.year : '';
+    let type = props.bikeUpdate ? props.bikeUpdate.type : '';
     let color = props.bikeUpdate ? props.bikeUpdate.color : '';
     let mileage = props.bikeUpdate ? props.bikeUpdate.mileage : '';
-    let bikeAvatar = props.bikeUpdate ? props.bikeUpdate.bikeAvatar : ''
-    let preview = props.bikeUpdate ? props.bikeUpdate.preview : ''
+    let bikeAvatar = props.bikeUpdate ? props.bikeUpdate.bikeAvatar : '';
+    let preview = props.bikeUpdate ? props.bikeUpdate.preview : '';
     let id = props.bikeUpdate ? props.bikeUpdate.id : 1;
 
     this.state = {
@@ -25,6 +26,7 @@ class BikeCreate extends React.Component {
       make,
       model,
       year,
+      type,
       color,
       mileage,
       id,
@@ -65,7 +67,7 @@ class BikeCreate extends React.Component {
     }
     this.setState = ({
 
-    })
+    });
     this.props.toggle();
   }
 
@@ -89,7 +91,7 @@ class BikeCreate extends React.Component {
             /><br />
             <TextField
               hintText="Suzuki, Yamaha, Etc"
-              floatingLabelText="Make"
+              floatingLabelText="Brand"
               multiLine={false}
               rows={1}
               name='make'
@@ -115,6 +117,16 @@ class BikeCreate extends React.Component {
               name='year'
               type='number'
               value={this.state.year}
+              onChange={this.handleChange}
+            /><br />
+            <TextField
+              hintText="Naked, Cruiser"
+              floatingLabelText="Type"
+              multiLine={false}
+              rows={1}
+              name='type'
+              type='text'
+              value={this.state.type}
               onChange={this.handleChange}
             /><br />
             <TextField
