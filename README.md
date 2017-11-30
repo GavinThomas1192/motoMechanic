@@ -84,7 +84,7 @@ Add additional notes about how to deploy this on a live system
 ### Built With
 
 Dropwizard - The web framework used
-Maven - Dependency Management
+NPM - Dependency Management
 ROME - Used to generate RSS Feeds
 Contributing
 
@@ -92,41 +92,31 @@ Please read CONTRIBUTING.md for details on our code of conduct, and the process 
 
 ### Versioning
 
-We use SemVer for versioning. For the versions available, see the tags on this repository.
+We use Github for versioning. For the versions available, see the tags on this repository.
 
 ### Authors
 
-Billie Thompson - Initial work - PurpleBooth
-See also the list of contributors who participated in this project.
+Gavin Thomas - Software Developer
+Shaun Wahle - Software Developer
 
 ### License
 
 This project is licensed under the MIT License - see the LICENSE.md file for details
 
-### Acknowledgments
-
-Hat tip to anyone who's code was used
-Inspiration
-etc
-
-
-
 ### Tech
 
-Dillinger uses a number of open source projects to work properly:
+MotoMechanic uses a number of open source projects to work properly:
 
-* [AngularJS] - HTML enhanced for web apps!
-* [Ace Editor] - awesome web-based text editor
-* [markdown-it] - Markdown parser done right. Fast and easy to extend.
-* [Twitter Bootstrap] - great UI boilerplate for modern web apps
-* [node.js] - evented I/O for the backend
-* [Express] - fast node.js network app framework [@tjholowaychuk]
-* [Gulp] - the streaming build system
-* [Breakdance](http://breakdance.io) - HTML to Markdown converter
-* [jQuery] - duh
-
-And of course Dillinger itself is open source with a [public repository][dill]
- on GitHub.
+* [React] - A JavaScript library for building user interfaces
+* [Babel] - Use next generation JavaScript, today.
+* [Express] - fast node.js network app framework
+* [Firebase] - Firebase helps you build better mobile apps and grow your business.
+* [Material-ui] - A Set of React Components that Implement Google's Material Design
+* [Npm] - npm is the package manager for JavaScript and the world’s largest software registry.
+* [Redux] - Redux is a predictable state container for JavaScript apps.
+* [Sass] - Sass is the most mature, stable, and powerful professional grade CSS extension language in the world.
+* [Superagent] - Redux is a predictable state container for JavaScript apps.
+* [Webpack] - webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.
 
 ### Installation
 
@@ -216,25 +206,15 @@ Verify the deployment by navigating to your server address in your preferred bro
 127.0.0.1:8000
 ```
 
-#### Kubernetes + Google Cloud
-
-See [KUBERNETES.md](https://github.com/joemccann/dillinger/blob/master/KUBERNETES.md)
-
-
 ### Todos
 
  - Write MORE Tests
  - Add Night Mode
 
-License
-----
-
-MIT
-
 
 **Free Software, Hell Yeah!**
 
-[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
+[//]: #
 
 
    [react]: <https://reactjs.org/>
