@@ -35,10 +35,8 @@
             
     * Take a look at the package.json inside functions for more commands
 
-##### Protected branch === master
-    * Please submit a PR with info on changes
 
-    # MotoMechanic
+# MotoMechanic
 
 Moto Mechanic was created as a resource for DIY mechanics or everyday people wanting to learn how to work on motorcycle. By signing up with a user account and adding your vehicle through our database we can help you figure out when and how to do your next repair. Whether that be providing you with links to parts and repairs or showing you the closest trusted garage. You'll never forget to get an oil change again!
 
@@ -239,24 +237,16 @@ MIT
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
 
-   [dill]: <https://github.com/joemccann/dillinger>
-   [git-repo-url]: <https://github.com/joemccann/dillinger.git>
-   [john gruber]: <http://daringfireball.net>
-   [df1]: <http://daringfireball.net/projects/markdown/>
-   [markdown-it]: <https://github.com/markdown-it/markdown-it>
-   [Ace Editor]: <http://ace.ajax.org>
-   [node.js]: <http://nodejs.org>
-   [Twitter Bootstrap]: <http://twitter.github.com/bootstrap/>
-   [jQuery]: <http://jquery.com>
-   [@tjholowaychuk]: <http://twitter.com/tjholowaychuk>
-   [express]: <http://expressjs.com>
-   [AngularJS]: <http://angularjs.org>
-   [Gulp]: <http://gulpjs.com>
-
-   [PlDb]: <https://github.com/joemccann/dillinger/tree/master/plugins/dropbox/README.md>
-   [PlGh]: <https://github.com/joemccann/dillinger/tree/master/plugins/github/README.md>
-   [PlGd]: <https://github.com/joemccann/dillinger/tree/master/plugins/googledrive/README.md>
-   [PlOd]: <https://github.com/joemccann/dillinger/tree/master/plugins/onedrive/README.md>
-   [PlMe]: <https://github.com/joemccann/dillinger/tree/master/plugins/medium/README.md>
-   [PlGa]: <https://github.com/RahulHP/dillinger/blob/master/plugins/googleanalytics/README.md>
-
+   [react]: <https://reactjs.org/>
+   [babel]: <https://babeljs.io/>
+   [firebase]: <https://firebase.google.com>
+   [material-ui]: <http://www.material-ui.com/#/>
+   [Sass]: <http://sass-lang.com/>
+   [redux]: <https://redux.js.org/>
+   [superagent]: <https://github.com/visionmedia/superagent>
+   [webpack]: <https://webpack.js.org/>
+   [npm]: <https://www.npmjs.com/>
+   [vscode]: <https://code.visualstudio.com/>
+   [trello]: <https://trello.com/>
+   [github]: <https://github.com/>
+   [slack]: <https://slack.com/>
