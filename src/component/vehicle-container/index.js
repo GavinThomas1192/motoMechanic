@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import BikeCreate from '../bike-create';
-import BikeList from '../bike-list'
+import vehicleCreate from '../vehicle-create';
+import vehicleList from '../vehicle-list'
 import uuid from 'uuid/v1';
 import AppBar from 'material-ui/AppBar';
-import { bikeCreateRequest, bikeUpdateRequest, bikeDeleteRequest } from '../../action/auth-actions'
+import { vehicleCreateRequest, vehicleUpdateRequest, vehicleDeleteRequest } from '../../action/auth-actions'
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import DatePicker from 'material-ui/DatePicker';
@@ -17,24 +17,24 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 
 
-class BikeContainer extends React.Component {
+class vehicleContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      toggleBikeCreate: false,
-      noBikes: true,
-      toggleSingleBike: false,
-      clickedMenuBike: {},
+      togglevehicleCreate: false,
+      novehicles: true,
+      toggleSinglevehicle: false,
+      clickedMenuvehicle: {},
     }
-    this.toggleCreateBike = this.toggleCreateBike.bind(this);
+    this.toggleCreatevehicle = this.toggleCreatevehicle.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
-    this.handleSingleBike = this.handleSingleBike.bind(this);
+    this.handleSinglevehicle = this.handleSinglevehicle.bind(this);
 
 
   }
-  toggleCreateBike() {
-    this.setState({ toggleBikeCreate: !this.state.toggleBikeCreate })
+  toggleCreatevehicle() {
+    this.setState({ togglevehicleCreate: !this.state.togglevehicleCreate })
   }
 
   handleToggle() {
@@ -43,11 +43,11 @@ class BikeContainer extends React.Component {
   }
 
   handleClose() {
-    this.setState({ noBikes: false, open: false, toggleSingleBike: false, toggleBikeCreate: false, });
+    this.setState({ novehicles: false, open: false, toggleSinglevehicle: false, togglevehicleCreate: false, });
   }
 
-  handleSingleBike(clickedBike) {
-    this.setState({ clickedMenuBike: clickedBike, toggleSingleBike: true })
+  handleSinglevehicle(clickedvehicle) {
+    this.setState({ clickedMenuvehicle: clickedvehicle, toggleSinglevehicle: true })
   }
 
 
@@ -71,7 +71,7 @@ class BikeContainer extends React.Component {
         label="Lets get to it"
         primary={true}
         keyboardFocused={true}
-        onClick={this.toggleCreateBike}
+        onClick={this.toggleCreatevehicle}
       />,
     ];
     const singleActions = [
@@ -90,42 +90,42 @@ class BikeContainer extends React.Component {
     ];
     return (
       <div>
-        <RaisedButton primary={true} label="New bike" onClick={this.toggleCreateBike} />
-        {/* ***** POPUP IF NO EXISTING BIKES ***** */}
-        {this.props.user.allBikes == null || this.props.user.allBikes == null ?
+        <RaisedButton primary={true} label="New vehicle" onClick={this.toggleCreatevehicle} />
+        {/* ***** POPUP IF NO EXISTING vehicleS ***** */}
+        {this.props.user.allvehicles == null || this.props.user.allvehicles == null ?
           <div>
             <Dialog
-              title="It looks like you have no bikes! Lets change that."
+              title="It looks like you have no vehicles! Lets change that."
               actions={actionsTwo}
               modal={false}
-              open={this.state.noBikes}
+              open={this.state.novehicles}
               onRequestClose={this.handleClose}
             >
             </Dialog>
           </div>
           : undefined}
-        {/* ***** CREATE NEW BIKE ***** */}
+        {/* ***** CREATE NEW vehicle ***** */}
         <Dialog
-          title="Input New bike"
+          title="Input New vehicle"
           actions={actions}
           modal={false}
-          open={this.state.toggleBikeCreate}
-          onRequestClose={this.toggleCreateBike}
+          open={this.state.togglevehicleCreate}
+          onRequestClose={this.toggleCreatevehicle}
           autoScrollBodyContent={true}
 
         >
-          <BikeCreate
+          <vehicleCreate
             buttonText={'Submit'}
-            onComplete={this.props.user.allBikes ? this.props.bikeUpdate : this.props.bikeCreate}
-            toggle={this.toggleCreateBike} />
+            onComplete={this.props.user.allvehicles ? this.props.vehicleUpdate : this.props.vehicleCreate}
+            toggle={this.toggleCreatevehicle} />
         </Dialog>
 
-        {/* ***** SINGLE BIKE VIEW AFTER CLICKING FROM LIST***** */}
+        {/* ***** SINGLE vehicle VIEW AFTER CLICKING FROM LIST***** */}
         <Dialog
-          title="Bike Stats"
+          title="vehicle Stats"
           actions={singleActions}
           modal={false}
-          open={this.state.toggleSingleBike}
+          open={this.state.toggleSinglevehicle}
           onRequestClose={this.handleClose}
           autoScrollBodyContent={true}
 
@@ -133,12 +133,12 @@ class BikeContainer extends React.Component {
 
           <div>
             <pre>
-              <h2>{this.state.clickedMenuBike.make}</h2>
-              <p>{this.state.clickedMenuBike.model}</p>
-              <p>{this.state.clickedMenuBike.year}</p>
-              <p>{this.state.clickedMenuBike.name}</p>
-              <p>{this.state.clickedMenuBike.mileage}</p>
-              <p>{this.state.clickedMenuBike.color}</p>
+              <h2>{this.state.clickedMenuvehicle.make}</h2>
+              <p>{this.state.clickedMenuvehicle.model}</p>
+              <p>{this.state.clickedMenuvehicle.year}</p>
+              <p>{this.state.clickedMenuvehicle.name}</p>
+              <p>{this.state.clickedMenuvehicle.mileage}</p>
+              <p>{this.state.clickedMenuvehicle.color}</p>
 
             </pre>
           </div>
@@ -147,26 +147,26 @@ class BikeContainer extends React.Component {
             title="Update This Note"
             actions={singleActions}
             modal={false}
-            open={this.state.toggleBikeCreate}
-            onRequestClose={this.toggleCreateBike}
+            open={this.state.togglevehicleCreate}
+            onRequestClose={this.toggleCreatevehicle}
             autoScrollBodyContent={true}
 
           >
-            <BikeCreate
-              buttonText={'Update Bike'}
-              onComplete={this.props.bikeUpdate}
-              simulateMenuClick={this.handleSingleBike}
-              toggle={this.toggleCreateBike}
-              bikeUpdate={this.state.clickedMenuBike} />
+            <vehicleCreate
+              buttonText={'Update vehicle'}
+              onComplete={this.props.vehicleUpdate}
+              simulateMenuClick={this.handleSinglevehicle}
+              toggle={this.toggleCreatevehicle}
+              vehicleUpdate={this.state.clickedMenuvehicle} />
           </Dialog>
 
         </Dialog>
-        {/* ***** BIKE LIST IF THEY HAVE BIKES ***** */}
+        {/* ***** vehicle LIST IF THEY HAVE vehicleS ***** */}
         {
-          this.props.user.allBikes ?
-            <BikeList
+          this.props.user.allvehicles ?
+            <vehicleList
 
-              toggleSingleBikeView={this.handleSingleBike} /> : undefined
+              toggleSinglevehicleView={this.handleSinglevehicle} /> : undefined
         }
       </div >
     );
@@ -180,9 +180,9 @@ let mapStateToProps = state => ({
 
 let mapDispatchToProps = dispatch => ({
 
-  bikeCreate: (bike) => dispatch(bikeCreateRequest(bike)),
-  bikeUpdate: (bike) => dispatch(bikeUpdateRequest(bike)),
+  vehicleCreate: (vehicle) => dispatch(vehicleCreateRequest(vehicle)),
+  vehicleUpdate: (vehicle) => dispatch(vehicleUpdateRequest(vehicle)),
 
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(BikeContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(vehicleContainer);

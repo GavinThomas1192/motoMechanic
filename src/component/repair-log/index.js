@@ -11,7 +11,7 @@ class RepairCreate extends React.Component {
     super(props);
 
     let name = props.repairUpdate ? props.repairUpdate.name : '';
-    let mileage = props.bikeUpdate ? props.repairUpdate.mileage : '';
+    let mileage = props.vehicleUpdate ? props.repairUpdate.mileage : '';
     let cost = props.materialCost? props.repairUpdate.cost : '';
     let repairPic = props.materialCost? props.repairUpdate.cost : '';
 
@@ -37,8 +37,8 @@ class RepairCreate extends React.Component {
     });
     if (name === 'repairPic') {
       let { files } = e.target;
-      let bikePic = files[0];
-      this.setState({ bikePic });
+      let vehiclePic = files[0];
+      this.setState({ vehiclePic });
 
       utils.photoToDataUrl(repairPic)
         .then(preview => this.setState({ preview }))
@@ -107,7 +107,7 @@ class RepairCreate extends React.Component {
               rows={1}
               name='repairPic'
               type='file'
-              value={this.state.bikeAvatar}
+              value={this.state.vehicleAvatar}
               onChange={this.handleChange}
             /><br />
 

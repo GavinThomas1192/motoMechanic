@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import Encyclopedia from '../encyclopedia'
 import Home from '../home'
-import BikeContainer from '../bike-container'
+import vehicleContainer from '../vehicle-container'
 import NavBar from '../navbar'
 import SignInScreen from '../firebase-login'
 import FourOhFour from '../four-oh-four'
@@ -48,7 +48,7 @@ class App extends React.Component {
                         <Route exact path="/encyclopedia" component={() => this.props.auth ? <Encyclopedia /> : <Redirect to='/login' />} />
                         <Route exact path="/login" component={() => !this.props.auth ? <SignInScreen /> : <Redirect to='/' />} />
                         <Route exact path="/" component={() => this.props.auth ? <Home /> : <Redirect to='/login' />} />
-                        <Route exact path="/bikes" component={() => this.props.auth ? <BikeContainer /> : <Redirect to='/login' />} />
+                        <Route exact path="/vehicles" component={() => this.props.auth ? <vehicleContainer /> : <Redirect to='/login' />} />
                         <Route component={() => <FourOhFour/>}/>
 
                         </Switch>

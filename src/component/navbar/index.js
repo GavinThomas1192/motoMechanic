@@ -39,7 +39,7 @@ class NavBar extends React.Component {
         this.setState({ open: false });
     }
 
- 
+
 
     render() {
 
@@ -85,7 +85,7 @@ class NavBar extends React.Component {
                                 onClick={this.handleClose}>Encyclopedia</MenuItem>
 
                             <MenuItem onClick={this.handleClose}
-                                containerElement={<Link to="/bikes" />}
+                                containerElement={<Link to="/vehicles" />}
                             >The Garage</MenuItem>
                         </Drawer>
                     </div>

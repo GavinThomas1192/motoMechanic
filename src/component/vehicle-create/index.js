@@ -6,20 +6,20 @@ import RaisedButton from 'material-ui/RaisedButton';
 import * as utils from '../../lib/utils';
 
 
-class BikeCreate extends React.Component {
+class vehicleCreate extends React.Component {
   constructor(props) {
     super(props);
 
-    let name = props.bikeUpdate ? props.bikeUpdate.name : '';
-    let make = props.bikeUpdate ? props.bikeUpdate.make : '';
-    let model = props.bikeUpdate ? props.bikeUpdate.model : '';
-    let year = props.bikeUpdate ? props.bikeUpdate.year : '';
-    let type = props.bikeUpdate ? props.bikeUpdate.type : '';
-    let color = props.bikeUpdate ? props.bikeUpdate.color : '';
-    let mileage = props.bikeUpdate ? props.bikeUpdate.mileage : '';
-    let bikeAvatar = props.bikeUpdate ? props.bikeUpdate.bikeAvatar : '';
-    let preview = props.bikeUpdate ? props.bikeUpdate.preview : '';
-    let id = props.bikeUpdate ? props.bikeUpdate.id : 1;
+    let name = props.vehicleUpdate ? props.vehicleUpdate.name : '';
+    let make = props.vehicleUpdate ? props.vehicleUpdate.make : '';
+    let model = props.vehicleUpdate ? props.vehicleUpdate.model : '';
+    let year = props.vehicleUpdate ? props.vehicleUpdate.year : '';
+    let type = props.vehicleUpdate ? props.vehicleUpdate.type : '';
+    let color = props.vehicleUpdate ? props.vehicleUpdate.color : '';
+    let mileage = props.vehicleUpdate ? props.vehicleUpdate.mileage : '';
+    let vehicleAvatar = props.vehicleUpdate ? props.vehicleUpdate.vehicleAvatar : '';
+    let preview = props.vehicleUpdate ? props.vehicleUpdate.preview : '';
+    let id = props.vehicleUpdate ? props.vehicleUpdate.id : 1;
 
     this.state = {
       name,
@@ -30,7 +30,7 @@ class BikeCreate extends React.Component {
       color,
       mileage,
       id,
-      bikeAvatar,
+      vehicleAvatar,
       preview,
       editing: false,
       completed: false,
@@ -45,12 +45,12 @@ class BikeCreate extends React.Component {
     this.setState({
       [e.target.name]: e.target.value,
     });
-    if (name === 'bikeAvatar') {
+    if (name === 'vehicleAvatar') {
       let { files } = e.target;
-      let bikeAvatar = files[0];
-      this.setState({ bikeAvatar });
+      let vehicleAvatar = files[0];
+      this.setState({ vehicleAvatar });
 
-      utils.photoToDataUrl(bikeAvatar)
+      utils.photoToDataUrl(vehicleAvatar)
         .then(preview => this.setState({ preview }))
         .catch(console.error);
     }
@@ -59,8 +59,8 @@ class BikeCreate extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     {
-      this.props.buttonText == 'Update Bike' ?
-        this.props.onComplete(this.state, this.props.bikeUpdate.id)
+      this.props.buttonText == 'Update vehicle' ?
+        this.props.onComplete(this.state, this.props.vehicleUpdate.id)
         :
 
         this.props.onComplete(this.state);
@@ -156,9 +156,9 @@ class BikeCreate extends React.Component {
 
               multiLine={false}
               rows={1}
-              name='bikeAvatar'
+              name='vehicleAvatar'
               type='file'
-              value={this.state.bikeAvatar}
+              value={this.state.vehicleAvatar}
               onChange={this.handleChange}
             /><br />
 
@@ -187,4 +187,4 @@ let mapDispatchToProps = dispatch => ({
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(BikeCreate);
+export default connect(mapStateToProps, mapDispatchToProps)(vehicleCreate);
