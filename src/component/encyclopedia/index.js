@@ -63,14 +63,14 @@ class Encyclopedia extends React.Component {
             style={styles.gridList}
           >
             <Subheader
-              style={{ fontSize: "34", color: "#000000" }}
+              style={{ fontSize: '34', color: '#000000' }}
             >Pick your poison</Subheader>
             {tilesData.map((tile) => (
               <GridTile
                 key={tile.img}
                 title={tile.title}
                 subtitle={<span> <b>{tile.author}</b></span>}
-                actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
+                actionIcon={<IconButton><StarBorder color='white' /></IconButton>}
               >
                 <img src={tile.img} />
               </GridTile>

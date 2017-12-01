@@ -20,57 +20,57 @@ class NavBar extends React.Component {
     super(props);
     this.state = { open: false };
 
-    this.handleClose = this.handleClose.bind(this)
-    this.handleToggle = this.handleToggle.bind(this)
+    this.handleClose = this.handleClose.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
   }
 
-    handleToggle() {
+  handleToggle() {
 
-        this.setState({ open: !this.state.open });
-    }
+    this.setState({ open: !this.state.open });
+  }
 
-    handleLogout() {
-        this.props.logoutUser();
-        localStorage.clear();
-    }
+  handleLogout() {
+    this.props.logoutUser();
+    localStorage.clear();
+  }
 
-    handleClose() {
-        this.setState({ open: false });
-    }
-
-
-
-    render() {
-
-        return (
-            <div >
-                {/* ***** NAVBAR FOR DRAWER ***** */}
-
-                <AppBar
-                    style={{ backgroundColor: '#757575' }}
-                    title="MotoMechanic"
-                    onLeftIconButtonTouchTap={this.handleToggle}
-
-                    iconElementRight={
-                        <IconMenu
-                            iconButtonElement={<IconButton><FontIcon className="material-icons">reorder</FontIcon></IconButton>}
-
-                            targetOrigin={{ horizontal: 'right', vertical: 'top' }}
-                            anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-                        >
-                            <MenuItem primaryText="Refresh" />
-                            <MenuItem primaryText="Help" />
-                            <MenuItem onClick={() => this.handleLogout()} primaryText="Sign out" />
-                        </IconMenu>
+  handleClose() {
+    this.setState({ open: false });
+  }
 
 
-                    }
-                />
-                {utils.renderIf(this.props.auth !== null,
-                    <div>
 
-                        <Drawer
+  render() {
+
+    return (
+      <div >
+        {/* ***** NAVBAR FOR DRAWER ***** */}
+
+        <AppBar
+          style={{ backgroundColor: '#757575' }}
+          title="MotoMechanic"
+          onLeftIconButtonTouchTap={this.handleToggle}
+
+          iconElementRight={
+            <IconMenu
+              iconButtonElement={<IconButton><FontIcon className="material-icons">reorder</FontIcon></IconButton>}
+
+              targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+              anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+            >
+              <MenuItem primaryText="Refresh" />
+              <MenuItem primaryText="Help" />
+              <MenuItem onClick={() => this.handleLogout()} primaryText="Sign out" />
+            </IconMenu>
+
+
+          }
+        />
+        {utils.renderIf(this.props.auth !== null,
+          <div>
+
+            <Drawer
               docked={false}
               width={200}
               open={this.state.open}
