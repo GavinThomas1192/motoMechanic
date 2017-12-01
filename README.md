@@ -221,6 +221,7 @@ Verify the deployment by navigating to your server address in your preferred bro
    [babel]: <https://babeljs.io/>
    [firebase]: <https://firebase.google.com>
    [material-ui]: <http://www.material-ui.com/#/>
+   [express]: https://expressjs.com/
    [Sass]: <http://sass-lang.com/>
    [redux]: <https://redux.js.org/>
    [superagent]: <https://github.com/visionmedia/superagent>
