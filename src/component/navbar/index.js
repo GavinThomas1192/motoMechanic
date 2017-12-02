@@ -81,12 +81,12 @@ class NavBar extends React.Component {
                 containerElement={<Link to="/" />}
                 onClick={this.handleClose}>Home</MenuItem>
               <MenuItem
-                containerElement={<Link to="/encyclopedia" />}
-                onClick={this.handleClose}>Encyclopedia</MenuItem>
+                containerElement={<Link to="/garage" />}
+                onClick={this.handleClose}>The Garage</MenuItem>
 
               <MenuItem onClick={this.handleClose}
-                containerElement={<Link to="/vehicles" />}
-              >The Garage</MenuItem>
+                containerElement={<Link to="/profile" />}
+              >Profile</MenuItem>
             </Drawer>
           </div>
         )}

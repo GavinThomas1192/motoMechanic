@@ -7,7 +7,7 @@ import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
 
-class Encyclopedia extends React.Component {
+class Garage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -85,4 +85,4 @@ class Encyclopedia extends React.Component {
   }
 }
 
-export default Encyclopedia;
+export default Garage;

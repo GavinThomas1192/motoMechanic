@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Encyclopedia from '../encyclopedia'
-import './_home.scss'
+import Garage from '../garage';
+import './_home.scss';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import AppBar from 'material-ui/AppBar';
-import NavBar from '../navbar'
+import NavBar from '../navbar';
 
 
 
@@ -17,8 +17,8 @@ class Home extends React.Component {
     super(props);
     this.state = { open: false };
 
-    this.handleClose = this.handleClose.bind(this)
-    this.handleToggle = this.handleToggle.bind(this)
+    this.handleClose = this.handleClose.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
   }
 
   componentDidMount() {
