@@ -85,8 +85,8 @@ class NavBar extends React.Component {
                 onClick={this.handleClose}>The Garage</MenuItem>
 
               <MenuItem onClick={this.handleClose}
-                containerElement={<Link to="/profile" />}
-              >Profile</MenuItem>
+                containerElement={<Link to="/repair" />}
+              >Repair</MenuItem>
             </Drawer>
           </div>
         )}
