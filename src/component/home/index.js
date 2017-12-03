@@ -22,7 +22,7 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    console.log('_THIS_DOT_PROPS_', this.props)
+    console.log('_THIS_DOT_PROPS_', this.props);
   }
 
   handleToggle() {
@@ -38,8 +38,8 @@ class Home extends React.Component {
   render() {
     return (
       <div className=''>
-        <h1>Hello from the home</h1>
-        <h2>I have no idea what to put here</h2>
+        <h1>MeeKanic</h1>
+        <h2>Welcome</h2>
 
       </div>
     );
