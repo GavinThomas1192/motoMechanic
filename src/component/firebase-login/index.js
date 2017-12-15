@@ -4,10 +4,14 @@ import NavBar from '../navbar'
 import { connect } from 'react-redux'
 import { FirebaseAuth } from 'react-firebaseui';
 import firebase from '../../lib/firebase-config'
-import { loginRequest, tokenSetRequest, facebookLoginRequest } from '../../action/auth-actions'
+import { loginRequest, tokenSetRequest, facebookLoginRequest, passwordResetRequest } from '../../action/auth-actions'
 import FacebookLogin from 'react-facebook-login';
 import firebaseui from 'firebaseui'
 import Paper from 'material-ui/Paper';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+
+
 
 
 
@@ -18,6 +22,8 @@ class SignInScreen extends React.Component {
             packaged: {},
             token: '',
             shadow: 5,
+            showPasswordReset: false,
+            email: '',
         }
         this.handleLogin = this.handleLogin.bind(this);
         this.onMouseOut = this.onMouseOut.bind(this);
@@ -30,6 +36,13 @@ class SignInScreen extends React.Component {
 
     onMouseOut() {
         this.setState({ shadow: 5 });
+    }
+
+    sendPasswordResetEmail() {
+        this.props.passwordReset(this.state.email)
+        this.setState({
+            showPasswordReset: !this.state.showPasswordReset,
+        })
     }
 
 
@@ -55,7 +68,6 @@ class SignInScreen extends React.Component {
             // queryParameterForWidgetMode: 'mode',
             // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
             // signInSuccessUrl: '*/',
-            // We will display Google and Facebook as auth providers.
             signInOptions: [
                 firebase.auth.EmailAuthProvider.PROVIDER_ID
             ],
@@ -114,7 +126,29 @@ class SignInScreen extends React.Component {
 
                     </Paper>
                 </div>
-            </div >
+
+                {this.state.showPasswordReset ? <div>
+                    <p>Input the email you signed up with, and we will email you directions to reset your password.</p>
+                    <form >
+                        <TextField
+                            hintText="email"
+                            floatingLabelText="email"
+                            multiLine={false}
+                            rows={1}
+                            name='email'
+                            type='text'
+                            value={this.state.email}
+                            onChange={(email) => this.setState({ email })}
+                        />
+                    </form>
+                    <RaisedButton label='Send Password Reset Email' onClick={this.sendPasswordResetEmail.bind(this)} primary={true} type='submit' />
+                    {/* <Button style={{ backgroundColor: '#757575', margin: 5 }} block onPress={this.sendPasswordResetEmail.bind(this)}>Send Password Reset Email</Button> */}
+                </div>
+                    : <div>
+                        <p>Forgot your password? Reset it <p style={{ color: 'red', textDecorationLine: "underline", }} onClick={() => this.setState({ showPasswordReset: !this.state.showPasswordReset })}>here</p></p>
+                    </div>}
+
+            </div>
         );
     }
 }
@@ -128,6 +162,7 @@ let mapDispatchToProps = dispatch => ({
     loginRequest: (user) => dispatch(loginRequest(user)),
     facebookLoginRequest: (user) => dispatch(facebookLoginRequest(user)),
     tokenSet: (token) => dispatch(tokenSetRequest(token)),
+    passwordReset: (email) => dispatch(passwordResetRequest(email)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignInScreen);
