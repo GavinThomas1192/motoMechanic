@@ -24,16 +24,6 @@
     *** apikey, databaseurl, projectid, authdomain, messagingsenderid, facebookappid, storagebucket
 
 
-### Because Firebase is a cloud service backend. We need to spin up an instance of it locally to write backend function responses.
-    * Navigate to the functions folder in terminal
-    * $ firebase login
-    * $ firebase functions:config:get > .runtimeconfig.json
-    * $ npm run shell
-    * Call your functions to test
-        * Example
-            * sendWelcomeEmail(mockData)
-            
-    * Take a look at the package.json inside functions for more commands
 
 
 # MotoMechanic
@@ -79,13 +69,17 @@ Explain what these tests test and why
 Give an example
 ### Deployment
 
-Add additional notes about how to deploy this on a live system
+    * Delete Old Build folder
+    * npm run build
+    * firebase deploy
+    * profit
 
 ### Built With
 
-Dropwizard - The web framework used
+React - The web framework used
 NPM - Dependency Management
-ROME - Used to generate RSS Feeds
+Node.js
+Webpack
 Contributing
 
 Please read CONTRIBUTING.md for details on our code of conduct, and the process for submitting pull requests to us.

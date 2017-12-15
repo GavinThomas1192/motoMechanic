@@ -43,6 +43,18 @@ export const userFetchRequest = () => dispatch => {
 }
 
 
+export const passwordResetRequest = email => dispatch => {
+    var auth = firebase.auth();
+
+    let emailAccount = email.toLowerCase();
+    console.log(emailAccount)
+    auth.sendPasswordResetEmail(emailAccount).then(function () {
+        console.log('Password reset email sent')
+    }).catch(function (error) {
+        console.log(error);
+    });
+
+};
 
 // ******** THIS IS THE LOGIN FOR EMAIL AND PASSWORD ********
 export const loginRequest = user => dispatch => {
