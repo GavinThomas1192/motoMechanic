@@ -31,7 +31,7 @@ class App extends React.Component {
   componentDidUpdate() {
     console.log('COMPONENT DID UPDATE', this.props.user);
   }
-
+//yolo
     render() {
         return (
             <div className='home'>
